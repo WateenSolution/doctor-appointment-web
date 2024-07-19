@@ -1,0 +1,32 @@
+.AlarmCardCon {
+  background-color: var(--g10);
+  border-radius: 8px;
+  //border-left: 7px solid;
+  padding: 13px 8px 13px 8px;
+  // height: 48px;
+
+  .leftCon {
+    display: flex;
+    align-items: center;
+    //flex-direction: row;
+  }
+  .centerCon {
+    display: flex;
+    justify-content: left;
+    margin-top: 1px;
+  }
+  .rightCon {
+    float: right;
+    flex: 1;
+  }
+  h6 {
+    font-family: "poppinsSemiBold";
+    font-size: 14px;
+    color: var(--g11);
+  }
+  h4 {
+    font-family: "poppinsSemiBold";
+    font-size: 18px;
+    color: var(--g11);
+  }
+}

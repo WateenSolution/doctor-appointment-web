@@ -1,0 +1,43 @@
+.heatChartCon {
+  margin-top: 30px;
+}
+.chartSwitchCon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.polarChartCon {
+  margin-top: 30px;
+}
+
+.progress-line-container {
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+}
+
+.progress-line-value {
+  margin-right: 8px;
+}
+
+.lineText {
+  font-family: "poppinsSemiBold";
+  font-size: 12px;
+}
+.custom-tooltip {
+  background-color: var(--w1);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 10px 10px 10px;
+}
+
+.chartCardTitleCon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

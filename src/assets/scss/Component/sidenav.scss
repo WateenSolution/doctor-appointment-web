@@ -1,0 +1,15 @@
+.navtextStyle {
+  color: var(--w1) !important;
+}
+
+.naviconStyle {
+  color: var(--w1) !important;
+}
+
+.navBtnStyle {
+  color: var(--primary_color) !important;
+}
+
+.activeRoute .overview path {
+  fill: var(--b2);
+}

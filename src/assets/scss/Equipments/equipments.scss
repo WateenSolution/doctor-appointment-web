@@ -1,0 +1,17 @@
+.equipCon {
+  .downloadCon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+
+    img {
+      height: 22px;
+      width: 22px;
+    }
+  }
+}
+
+.rightCon {
+  display: flex;
+}

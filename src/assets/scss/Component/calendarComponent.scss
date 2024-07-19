@@ -1,0 +1,50 @@
+.calendar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0 7px 15px rgb(193, 205, 227);
+}
+
+.calendar-container {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.calendar-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid var(--g4);
+  margin: 10px 10px;
+}
+
+.calendar-box.selected {
+  background-color: var(--g3);
+  border: 0px;
+}
+
+.calendar-box.current {
+  font-weight: bold;
+}
+
+/* Scrollbar styles (you can customize these as per your preference) */
+.calendar-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.calendar-container::-webkit-scrollbar-track {
+  background: var(--w1);
+}
+
+.calendar-container::-webkit-scrollbar-thumb {
+  background: var(--g5);
+}
+
+.calendar-container::-webkit-scrollbar-thumb:hover {
+  background: var(--g6);
+}

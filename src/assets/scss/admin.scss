@@ -1,0 +1,61 @@
+// Login
+@import "./Auth/login.scss";
+
+// Utils
+@import "./utils/colors";
+@import "./utils/common";
+@import "./utils/fontFamily";
+
+@import "./Component//chart.scss";
+@import "./Component/header";
+@import "./Component/sidenav";
+@import "./Component/commonStyle.scss";
+@import "./Component/specsInfo.scss";
+@import "./Component/specsCard.scss";
+@import "./Component/alarmCard.scss";
+@import "./Component/overviewInfo.scss";
+@import "./Component/commonCard.scss";
+@import "./Component/equipmentCard.scss";
+@import "./Component/preReportCard.scss";
+@import "./Component/dropDownCard.scss";
+@import "./Component/customReportCard.scss";
+@import "./Component/calendarComponent.scss";
+@import "./Component/dropDownMain.scss";
+@import "./Component/checkBox.scss";
+@import "./Component/alarmDropDown.scss";
+@import "./Component/table.scss";
+@import "./Component/loader.scss";
+@import "./Component/appInput.scss";
+@import "./Component/weatherComponent.scss";
+@import "./Component/overviewCommonCard.scss";
+
+// Operations
+@import "./Operations/operations.scss";
+
+//Overview
+@import "./Overview/overview.scss";
+
+//Equipment
+@import "./Equipments/equipments.scss";
+
+//Alarms
+@import "./Alarms/alarms.scss";
+
+//Testing
+@import "./Testing/testing.scss";
+
+//Sites
+@import "./Sites/siteDetail.scss";
+
+//Error
+@import "./Error/error.scss";
+
+//Induction
+@import "./Induction/induction.scss";
+@import "./Induction/inductionDetail.scss";
+
+//Contact Us
+@import "./ContactUs//contactUs.scss";
+
+//vendor
+@import "./Vendor//vendor.scss";

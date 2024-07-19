@@ -1,0 +1,9 @@
+export const GET_FORMS = "induction/get-forms";
+export const GET_ORGANIZATIONS = "induction/get-organizations";
+export const ADD_MPPT = "induction/add-mppt";
+export const DELETE_MPPT = "induction/delete-mppt";
+export const ADD_ONBOARDING_STATION = "induction/add-onboarding-station";
+export const GET_INDUCTION_DETAILS = "induction/get-onboarding-details";
+export const UPDATE_FORM_STATUS = "induction/update-form-status";
+export const ADD_ORGANIZATION = "induction/add-organization"
+export const ADD_SUPPLIER = "induction/add-supplier"

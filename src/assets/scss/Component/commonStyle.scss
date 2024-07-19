@@ -1,0 +1,42 @@
+.aiRow {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.heading {
+  color: var(--b1);
+  font-size: 30px;
+  font-family: "PoppinsBold";
+}
+
+.container {
+  background-color: var(--w1);
+  padding: 0px 0px 0px 0px;
+}
+
+.titleText {
+  font-size: 21px;
+  font-weight: 400;
+  margin-top: 24px;
+}
+
+.valueText {
+  font-family: "poppinsSemiBold";
+  color: var(--color-wateen);
+}
+.row-between {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.induction-table {
+  text-align: center;
+  font-size: 14px;
+}
+
+.placeholder-color::placeholder {
+  color: #000000 !important;
+  font-size: 14px;
+}

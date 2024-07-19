@@ -1,0 +1,26 @@
+.specsInfoCon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--w1);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.25);
+  height: "100%";
+
+  .specsInfoTitle {
+    font-size: 14px;
+  }
+  .specsInfoValue {
+    font-size: 26px;
+    margin-top: 10px;
+  }
+  .specsInnerCon {
+    display: flex;
+    .specsUnit {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+  }
+}

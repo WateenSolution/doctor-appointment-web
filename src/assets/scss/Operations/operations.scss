@@ -1,0 +1,71 @@
+.operationCon {
+  .siteCardCon {
+    background-color: var(--b2);
+    border-radius: 10px;
+    border-bottom: 7px solid var(--color-wateen);
+    padding: 20px;
+
+    .leftCon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .rightCon {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    h6 {
+      font-family: "poppinsSemiBold";
+      font-size: 14px;
+      color: var(--w1);
+    }
+    h4 {
+      font-family: "poppinsSemiBold";
+      font-size: 26px;
+      color: var(--w1);
+    }
+  }
+  .tickets-con {
+    margin-top: 20px;
+  }
+
+  .healthCardCon {
+    background-color: var(--w1);
+    border-radius: 5px;
+    border: 3px solid var(--color-wateen);
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+
+    .leftHealthCon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .rightHealthCon {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 8px;
+    }
+    .healthCardTitle {
+      font-family: "poppinsSemiBold";
+      font-size: 14px;
+      color: var(--b1);
+    }
+    .healthCardCount {
+      font-family: "poppinsSemiBold";
+      font-size: 26px;
+      color: var(--b1);
+    }
+  }
+}
+/* Styles for the station counts rows */
+.station-counts {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

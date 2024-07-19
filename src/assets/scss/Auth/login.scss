@@ -1,0 +1,219 @@
+.Auth-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh; /* Full viewport height */
+  font-family: "Poppins", sans-serif;
+  overflow: hidden; /* Ensure the animation doesn't overflow */
+  position: relative; /* Ensure relative positioning for children */
+  background-color: #4e5faf;
+
+  .Form-column,
+  .Image-column {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .Form-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the form column takes up full height */
+    width: 100%; /* Ensure the form column takes up full width */
+    padding: 40px;
+
+    z-index: 1;
+
+    .Auth-form {
+      width: 100%; /* Full width for form */
+      height: 100%; /* Full height for form */
+      max-width: none; /* Remove max width constraint */
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+      padding: 20px; /* Padding around the form */
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.02); /* Slightly enlarge on hover */
+      }
+
+      .Auth-form-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%; /* Full width for content */
+        height: 100%; /* Full height for content */
+
+        .Auth-form-title {
+          font-size: 32px;
+          color: #4e5faf;
+          font-weight: 700;
+          margin-bottom: 24px;
+        }
+
+        .labelText {
+          color: #252525;
+          font-size: 16px;
+          margin-bottom: 8px;
+        }
+
+        .form-control {
+          width: 100%;
+          padding: 12px 12px 12px 40px; /* Adjust padding for icon */
+          border-radius: 20px; /* Rounded corners */
+          border: 1px solid #ddd; /* Light border */
+          font-size: 16px;
+          margin-bottom: 16px;
+          transition: border-color 0.3s ease;
+
+          &:focus {
+            outline: none;
+            border-color: #020246;
+          }
+        }
+
+        .input-icon {
+          position: relative;
+          width: 100%;
+
+          .icon {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #aaa;
+          }
+        }
+
+        .error {
+          color: #ff4d4f;
+          font-size: 12px;
+          margin-top: -8px;
+          margin-bottom: 12px;
+        }
+
+        .linkText {
+          color: #020246;
+          font-size: 14px;
+          text-decoration: underline;
+          cursor: pointer;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: #252525;
+          }
+        }
+
+        .button-style {
+          width: 100%;
+          padding: 14px;
+          background-color: #020246;
+          color: #ffffff;
+          font-size: 16px;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+
+          &:hover {
+            background-color: #252525;
+          }
+        }
+
+        .remember-forgot-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          margin-top: 16px;
+
+          .remember-me {
+            display: flex;
+            align-items: center;
+
+            input {
+              display: none; /* Hide default checkbox */
+
+              &:checked + .custom-checkbox {
+                background-color: #020246;
+              }
+
+              &:checked + .custom-checkbox::before {
+                content: "";
+                display: block;
+                width: 12px;
+                height: 12px;
+                background-color: #ffffff;
+                border-radius: 50%;
+                margin: 2px;
+              }
+            }
+
+            .custom-checkbox {
+              width: 18px;
+              height: 18px;
+              border: 2px solid #020246;
+              border-radius: 50%;
+              position: relative;
+              display: inline-block;
+              margin-right: 8px;
+              cursor: pointer;
+            }
+          }
+
+          .linkText {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .Image-column {
+    width: 100%;
+    height: 100%; /* Ensure the image column takes up full height */
+    overflow: hidden; /* Ensure the image does not overflow */
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensure the image covers the entire container */
+      border-radius: 0; /* Remove border-radius */
+      transition: filter 0.3s ease;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+
+    .Form-column {
+      width: 100%; /* Full width on smaller screens */
+      height: 50vh; /* Adjust height to half of viewport height */
+      background-image: none; /* Remove background image on smaller screens */
+    }
+
+    .Auth-form {
+      width: 100%; /* Full width on smaller screens */
+      height: 100%; /* Full height on smaller screens */
+      box-shadow: none; /* Remove box shadow for full-width form */
+
+      .Auth-form-content {
+        padding: 20px; /* Adjust padding for smaller screens */
+      }
+    }
+
+    .Image-column {
+      width: 100%; /* Full width for image column on smaller screens */
+      height: 50vh; /* Adjust height to half of viewport height */
+      img {
+        border-radius: 0; /* Remove border-radius on smaller screens */
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+.container__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.container__nav > div:last-of-type {
+  display: flex;
+  align-items: center;
+}
+.links {
+  display: flex;
+  gap: 1.7rem;
+}
+.links a {
+  color: #fff;
+  font-size: 0.87rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.links a.active {
+  color: var(--color-black);
+}
+.links__button {
+  order: 5;
+}
+
+.menu {
+  font-size: 1.4rem;
+  border: none !important;
+  display: block;
+}
+.hide__button {
+  display: none;
+}

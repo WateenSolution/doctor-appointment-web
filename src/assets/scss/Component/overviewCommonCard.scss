@@ -1,0 +1,29 @@
+.overviewCommonCardCon {
+  background-color: var(--w1);
+  border-radius: 8px;
+  padding: 24px 16px 24px 16px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  h4 {
+    font-size: 20px;
+  }
+
+  .buttonCon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+  }
+
+  .text {
+    font-size: 14px;
+    border-radius: 6px;
+    margin-right: 6px;
+    margin-top: 5px;
+    font-weight: 500;
+  }
+}
