@@ -1,7 +1,8 @@
 import React from "react";
 import { Card, Row, Col } from "antd";
-import { AppHeading } from "..";
+
 import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { AppHeading, OverviewCommonCard, OverviewCard2 } from "..";
 
 export const ProfilePatComp = ({
   profilePicture,
@@ -10,7 +11,7 @@ export const ProfilePatComp = ({
   email,
 }) => {
   return (
-    <Card className="patient-profile">
+    <div className="patient-profile">
       <AppHeading title="Profile" titleFontWeight={800} titleFontSize="20px" />
       <div className="patient-profile-header">
         <img
@@ -52,6 +53,24 @@ export const ProfilePatComp = ({
           </Col>
         </Row>
       </div>
-    </Card>
+
+      <div>
+        <Row>
+          <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+            <OverviewCommonCard
+              title="Schedules"
+              bgColor="#F0F0F0"
+              titleFontSize={20}
+              titleFontWeight={800}
+              titleFontFamily="Lato"
+              titleLineHeight="36px"
+              titleLetterSpacing={0.25}
+            >
+              <OverviewCard2 count={0} />
+            </OverviewCommonCard>
+          </Col>
+        </Row>
+      </div>
+    </div>
   );
 };

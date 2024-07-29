@@ -93,7 +93,7 @@ const DashboardDoctor = () => {
             </Row>
             <Row>
               <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                <OverviewCommonCard
+                {/*   <OverviewCommonCard
                   title={"Today's Appoinments"}
                   bgColor={"#F0F0F0"}
                   titleFontSize={20}
@@ -115,7 +115,7 @@ const DashboardDoctor = () => {
                     con_mT={30}
                     con_mB={20}
                   />
-                </OverviewCommonCard>
+                </OverviewCommonCard>*/}
               </Col>
             </Row>
           </Col>

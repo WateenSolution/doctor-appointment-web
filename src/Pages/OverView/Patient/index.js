@@ -6,7 +6,7 @@ import {
   ProfilePatComp,
   AppHeading,
   OverviewCommonCard,
-  OverviewCard2,
+  DoctorListCard,
 } from "../../../components";
 import { dashboard, DashboardPatImg, networkText } from "../../../utilities";
 import Box from "@mui/material/Box";
@@ -16,12 +16,13 @@ import {
   getFilterOrAllDoc,
 } from "../../../redux/actions";
 import { toast } from "react-toastify";
+import { Select } from "antd";
 
-console.log("Patient dashboard", dashboard);
+const { Option } = Select;
 
 const DashboardPatient = () => {
   const { dashboard, filterOrDocDetail } = useSelector(
-    (state) => state?.dashboard
+    (state) => state.dashboard
   );
   const dispatch = useDispatch();
 
@@ -30,7 +31,7 @@ const DashboardPatient = () => {
     filterOfAllData();
   }, []);
 
-  const getPatientDetail = async (values) => {
+  const getPatientDetail = async () => {
     if (navigator.onLine) {
       const body = {
         onSuccess: async (res) => {},
@@ -45,17 +46,13 @@ const DashboardPatient = () => {
 
   const filterOfAllData = async (value) => {
     if (navigator.onLine) {
-      console.log("FilterOfAllData", value);
       const requestBody = {
         qualification_specialisation:
           value?.qualification_specialisation || null,
       };
       const body = {
         values: requestBody,
-        onSuccess: async (res) => {
-          if (res) {
-          }
-        },
+        onSuccess: async (res) => {},
         onFailure: (error) => {},
       };
 
@@ -64,7 +61,11 @@ const DashboardPatient = () => {
       toast.error(networkText);
     }
   };
-  console.log("jsfirjek", filterOrDocDetail);
+
+  const handleFilterChange = (value) => {
+    filterOfAllData({ qualification_specialisation: value });
+  };
+
   return (
     <AppContainer style={{ position: "relative" }}>
       <Box sx={{ width: "100%" }}>
@@ -78,7 +79,7 @@ const DashboardPatient = () => {
             className="PatientContent-column"
           >
             <AppHeading
-              title={"Dashboard"}
+              title="Dashboard"
               titleFontWeight={800}
               dateCheck={true}
             />
@@ -108,20 +109,48 @@ const DashboardPatient = () => {
                 </Fade>
               </Col>
             </Row>
+
             <Row>
-              <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                <OverviewCommonCard
-                  title={"Schedules"}
-                  bgColor={"#F0F0F0"}
-                  titleFontSize={20}
-                  titleFontWeight={800}
-                  titleFontFamily={"Lato"}
-                  titleLineHeight={"36px"}
-                  titleLetterSpacing={0.25}
-                >
-                  <OverviewCard2 count={0} />
-                </OverviewCommonCard>
-              </Col>
+              <OverviewCommonCard
+                bgColor="#F0F0F0"
+                titleFontSize={20}
+                titleFontWeight={800}
+                titleFontFamily="Lato"
+                titleLineHeight="36px"
+                titleLetterSpacing={0.25}
+              >
+                <Col span={24}>
+                  <Select
+                    placeholder="Filter by Specialization"
+                    onChange={handleFilterChange}
+                    style={{ width: "100%", marginBottom: "20px" }}
+                  >
+                    <Option value="Cardiology">Cardiology</Option>
+                    <Option value="Dermatology">Dermatology</Option>
+                    <Option value="Neurology">Neurology</Option>
+                    <Option value="Pediatrics">Pediatrics</Option>
+                    <Option value="General">General</Option>
+                    {/* Add more options as needed */}
+                  </Select>
+                </Col>
+                {filterOrDocDetail?.getAllFilterDoc?.map((doctor, index) => (
+                  <DoctorListCard
+                    key={index}
+                    title={doctor.username}
+                    iconSrc={doctor.image}
+                    value={doctor.qualification_specialisation}
+                    valUnit="Speciality"
+                    icoHeight={60}
+                    icoWidth={60}
+                    mT={20}
+                    mL={20}
+                    con_mT={10}
+                    rating={doctor.average_rating}
+                    description={doctor.about}
+                    totalReviews={doctor.total_reviews}
+                  />
+                ))}
+              </OverviewCommonCard>
             </Row>
           </Col>
           <Col

@@ -1,0 +1,132 @@
+.doctorListCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #4e5faf, #2a3b8f);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .leftSide {
+    display: flex;
+    flex-direction: column;
+    color: white;
+
+    .valueContainer {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      position: relative;
+    }
+
+    .ratingContainer {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .description {
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    .reviewsContainer {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .rightSide {
+    display: flex;
+    align-items: center;
+
+    .iconContainer {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      img {
+        border-radius: 50%;
+        border: 3px solid white;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    .additionalIcons {
+      display: flex;
+      gap: 15px;
+      margin-left: 20px;
+    }
+  }
+
+  .ratingStar {
+    font-size: 16px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+
+    .leftSide {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .rightSide {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+
+      .iconContainer img {
+        height: 40px;
+        width: 40px;
+      }
+
+      .additionalIcons {
+        margin-left: 0;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .leftSide {
+      font-size: 14px;
+
+      .valueContainer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .ratingContainer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .rightSide {
+      .iconContainer img {
+        height: 30px;
+        width: 30px;
+      }
+    }
+  }
+}

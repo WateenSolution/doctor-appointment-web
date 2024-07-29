@@ -1,6 +1,7 @@
 export { default as Footer } from "./Nav/Footer";
 
 // Container
+
 export * from "./Container/AppContainer";
 export * from "./Loader/Loader";
 
@@ -24,6 +25,7 @@ export * from "./Charts/ProgressLineChart";
 export * from "./Charts/CompBarCharts";
 
 //Cards
+export * from "./Cards/DoctorListCard";
 export * from "./Cards/OverviewCommonCard";
 export * from "./Cards/ChartCard";
 export * from "./Headings/AppHeading";
@@ -51,7 +53,7 @@ export * from "./Cards/ContactFormCard";
 export * from "./Cards/UserCard";
 export * from "./Inputs/InputBox";
 export * from "./Cards/ChngPassFormCard";
-export * from "./Cards/OverviewCard1";
+export * from "./Cards/DoctorListCard";
 export * from "./Cards/OverviewCard2";
 export * from "./Cards/WeatherCard";
 export * from "./Cards/HealthCard";

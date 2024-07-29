@@ -28,6 +28,7 @@ import loginSide from "../assets/images/login-side.jpeg";
 import DashboardDocImg from "../assets/images/dashboardDocImg.jpeg";
 import DashboardPatImg from "../assets/images/dasboardPatImg.png";
 import AppointmentImg from "../assets/images/ScheduleAppImg.jpeg";
+import DefaultProfile from "../assets/images/defaultProfile.jpeg";
 export {
   chngPass,
   Battery,
@@ -59,4 +60,5 @@ export {
   DashboardDocImg,
   DashboardPatImg,
   AppointmentImg,
+  DefaultProfile,
 };
