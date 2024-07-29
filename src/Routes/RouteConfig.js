@@ -17,65 +17,46 @@ const RouteConfig = () => {
   const { userInfo } = useSelector((state) => state?.auth);
 
   useEffect(() => {
-    const redirect =
-      My_Routes.Public_Routes.find(
-        (element) => element?.path === location?.pathname
-      ) || {};
-    if (redirect?.path && isLogin) {
+    const redirect = My_Routes.Public_Routes.find(
+      (element) => element?.path === location?.pathname
+    );
+    if (redirect && isLogin) {
       navigate("/");
     }
   }, [location?.pathname]);
 
   const switchArrays = (role) => {
-    console.log("role is", role);
     switch (role) {
       case "Patient":
-        return My_Routes.Super_Admin_Private_Routes;
-        break;
-      case "Admin":
-        return My_Routes.Admin_Private_Routes;
-        break;
-      case "Installer":
-        return My_Routes.Installer_Private_Routes;
-        break;
-      case "Client":
-        return My_Routes.Client_Private_Routes;
-        break;
-      case "OPS Manager":
-        return My_Routes.OPS_MANAGER_Private_Routes;
-        break;
-      case "Site Manager":
-        return My_Routes.Site_MANAGER_Private_Routes;
-        break;
+        return My_Routes.Patient_Private_Routes;
+      case "Doctor":
+        return My_Routes.Doctor_Private_Routes;
       default:
         return My_Routes.Client_Private_Routes;
-        break;
     }
   };
-  return (
-    <>
-      <Routes>
-        {My_Routes.Public_Routes.map((comp, index) => (
-          <Route key={index} path={comp.path} element={comp.component} />
-        ))}
 
-        {switchArrays(userInfo?.user?.role)?.map((comp, index) => {
-          return (
-            <Route
-              key={index}
-              path={comp.path}
-              element={
-                <RequireAuth>
-                  <Sidenav>{comp.component}</Sidenav>
-                </RequireAuth>
-              }
-            />
-          );
-        })}
-      </Routes>
-    </>
+  return (
+    <Routes>
+      {My_Routes.Public_Routes.map((comp, index) => (
+        <Route key={index} path={comp.path} element={comp.component} />
+      ))}
+
+      {switchArrays(userInfo?.user?.role)?.map((comp, index) => (
+        <Route
+          key={index}
+          path={comp.path}
+          element={
+            <RequireAuth>
+              <Sidenav>{comp.component}</Sidenav>
+            </RequireAuth>
+          }
+        />
+      ))}
+    </Routes>
   );
 };
+
 export default RouteConfig;
 
 function RequireAuth({ children }) {

@@ -54,8 +54,9 @@ const authSlice = createSlice({
       state.error = null;
     });
     builder.addCase(forgotPassAction.fulfilled, (state, { payload }) => {
+      console.log("payload", payload);
       state.forgotLoad = false;
-      state.userInfo = null;
+      state.userInfo = payload;
     });
 
     builder.addCase(forgotPassAction.rejected, (state, { payload }) => {

@@ -52,8 +52,23 @@ export const forgotPassAction = createAsyncThunk(
   Types.FORGOT_PASS,
   async ({ values, onSuccess, onFailure }, { rejectWithValue }) => {
     try {
+      console.log("value", values);
       const requestBody = {
         email: values.email,
+        username: values.username,
+        password: values.password,
+        role_id: values.role_id,
+        phone_number: values.phone_number,
+        image: values.image,
+        qualifications: values.qualifications,
+        qualification_specialisation: values.qualification_specialisation,
+        availability_timing: values.availability_timing,
+        remote_inperson: values.remote_inperson,
+        location: values.location,
+        experience: values.experience,
+        certificates: values.certificates,
+        doctor_fee: values.doctor_fee,
+        about: values.about,
       };
 
       const res = await post(ENDPOINTS.FORGOT_PASSWORD, requestBody);

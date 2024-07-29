@@ -47,15 +47,13 @@ const Login = () => {
     }
   };
 
-  console.log("Rendering Login Component");
-
   return (
     <AppContainer loading={false} style={{ position: "relative" }}>
       <div>
         <AuthHeader />
         <Row justify="center" align="middle" className="Auth-form-container">
           <Col xs={24} sm={24} md={12} lg={12} xl={12} className="Image-column">
-            <Fade direction="right" triggerOnce>
+            <Fade direction="left" triggerOnce>
               <img src={loginSide} alt="Auth" className="Auth-image" />
             </Fade>
           </Col>

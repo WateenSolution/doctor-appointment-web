@@ -37,6 +37,7 @@
     "react-awesome-reveal": "^4.2.12",
     "react-bootstrap": "^2.7.4",
     "react-d3-tree": "^3.6.1",
+    "react-datepicker": "^7.3.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-loader-spinner": "^5.3.4",

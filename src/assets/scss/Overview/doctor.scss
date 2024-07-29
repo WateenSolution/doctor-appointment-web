@@ -1,0 +1,73 @@
+.Dashboard-container {
+  height: 100vh;
+  display: flex;
+  align-items: flex-start; /* Align items at the start */
+  justify-content: space-between; /* Ensure space is between columns */
+  position: relative;
+}
+
+.Content-column {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  flex: 1;
+}
+
+.Content-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.Content-left,
+.Content-right {
+  padding: 20px;
+}
+
+.Content-left {
+  flex: 1;
+  text-align: left; /* Align text to the left */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Content-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Dashboard-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.Dashboard-content {
+  text-align: left; /* Align text to the left */
+}
+
+.Dashboard-title {
+  font-size: 25px;
+  color: #4e5faf;
+}
+
+.Dashboard-message {
+  font-size: 18px; /* Smaller than Dashboard-title */
+  color: #333; /* Optional: Adjust color if needed */
+  margin-top: 10px;
+}
+
+.icon {
+  font-size: 1.5rem;
+  color: #4e5faf;
+  margin-right: 10px;
+}
+
+.Profile-column {
+  display: flex;
+  align-items: flex-start;
+
+  width: 300px; /* Fixed width for the profile column */
+}

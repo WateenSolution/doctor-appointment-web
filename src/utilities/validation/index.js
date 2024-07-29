@@ -7,6 +7,16 @@ export const loginFormFields = {
   username: "",
   password: "",
 };
+export const AppointmentFormFields = {
+  firstName: "",
+  lastName: "",
+  appointmentDate: "",
+  appointmentTime: "",
+  doctor: "",
+  departments: [], // Use an array for selected departments
+  specifiedDepartment: "",
+  notes: "",
+};
 
 export const chngPassFormFields = {
   newpass: "",
@@ -28,7 +38,20 @@ export const PRComparisonFormFields = yup.object().shape({
 });
 
 export const forgotFormFields = {
+  username: "",
   email: "",
+  password: "",
+  phoneNumber: "",
+  picture: null,
+  qualifications: "",
+  qualificationSpecialisation: "",
+  availabilityTiming: [],
+  remoteInperson: "",
+  location: "",
+  experience: "",
+  certificates: "",
+  doctorFee: "",
+  about: "",
 };
 
 export const contactUsFormFields = {
@@ -303,12 +326,95 @@ export const ChngPassVS = yup.object().shape({
     .matches(passwordRegExp, passwordMessage),
 });
 
-export const ForgotPasswordVS = yup.object().shape({
-  email: yup
+export const AppointmentVS = yup.object({
+  firstName: yup
     .string()
-    .required("Email Required")
-    .email("Please provide a valid email address"),
+    .required("First Name is required")
+    .min(2, "First Name is too short"),
+
+  lastName: yup
+    .string()
+    .required("Last Name is required")
+    .min(2, "Last Name is too short"),
+
+  appointmentDate: yup
+    .date()
+    .required("Appointment Date is required")
+    .min(new Date(), "Appointment Date cannot be in the past"),
+
+  appointmentTime: yup.string().required("Appointment Time is required"),
+
+  doctor: yup
+    .string()
+    .required("Doctor is required")
+    .min(2, "Doctor Name is too short"),
+
+  departments: yup.array().min(1, "At least one department is required"),
+
+  specifiedDepartment: yup.string().when("departments", {
+    is: (departments) => departments.includes("others"),
+    then: yup.string().required("Please specify the department"),
+  }),
+
+  notes: yup.string().max(500, "Notes cannot exceed 500 characters"),
 });
+
+export const ForgotPasswordVS = (role) => {
+  return yup.object().shape({
+    username: yup.string().required("Username is required"),
+    password: yup
+      .string()
+      .required("Password is required")
+      .matches(passwordRegExp, passwordMessage),
+    email: yup
+      .string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    phoneNumber: yup.string().required("Phone number is required"),
+    picture: yup.mixed().nullable(),
+    qualifications:
+      role === "Doctor"
+        ? yup.string().required("Qualifications are required")
+        : yup.string().nullable(),
+    qualificationSpecialisation:
+      role === "Doctor"
+        ? yup.string().required("Specialisation is required")
+        : yup.string().nullable(),
+    availabilityTiming:
+      role === "Doctor"
+        ? yup.array().of(
+            yup.object().shape({
+              start: yup.string().required("Start time is required"),
+              end: yup.string().required("End time is required"),
+            })
+          )
+        : yup.array().nullable(),
+    remoteInperson:
+      role === "Doctor"
+        ? yup.string().required("Remote/In-person selection is required")
+        : yup.string().nullable(),
+    location:
+      role === "Doctor"
+        ? yup.string().required("Location is required")
+        : yup.string().nullable(),
+    experience:
+      role === "Doctor"
+        ? yup.string().required("Experience is required")
+        : yup.string().nullable(),
+    certificates:
+      role === "Doctor"
+        ? yup.string().required("Certificates are required")
+        : yup.string().nullable(),
+    doctorFee:
+      role === "Doctor"
+        ? yup.string().required("Doctor fee is required")
+        : yup.string().nullable(),
+    about:
+      role === "Doctor"
+        ? yup.string().required("About information is required")
+        : yup.string().nullable(),
+  });
+};
 
 export const ContactUsVS = yup.object().shape({
   subject: yup.string().required("Subject Required"),

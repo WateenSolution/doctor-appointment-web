@@ -6,17 +6,12 @@ export const OverviewCard1 = ({
   iconSrc,
   value,
   valUnit,
-  total,
-  totalUnit,
-  valFontSize,
   icoHeight,
   icoWidth,
   unitLeft,
-  valFontWeight,
   mT,
   mL,
   con_mT,
-  con_mB,
 }) => {
   return (
     <div

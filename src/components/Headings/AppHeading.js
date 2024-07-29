@@ -1,9 +1,9 @@
 import React from "react";
+import moment from "moment";
 import { AppButton } from "../../components";
 import { IconButton } from "@mui/material";
-import RefreshIcon from "@mui/icons-material/Refresh";
-import { CustomTextBox } from "../CustomComponents/CustomTextBox";
 import { refreshIcon } from "../../utilities";
+
 export const AppHeading = ({
   title,
   onClick,
@@ -12,39 +12,33 @@ export const AppHeading = ({
   onRefreshClick,
   showButton,
   disabled,
-  titleColor,
-  titleFontSize,
+  dateCheck,
   titleFontWeight,
-  titleFontFamily,
-  titleLineHeight,
-  titleLetterSpacing,
+  titleFontSize,
 }) => {
+  const currentDate = moment().format("dddd, D MMMM YYYY");
+
   return (
     <div className="app-heading">
-      <p
-        className="heading"
-        style={{
-          color: titleColor || "#454545",
-          fontFamily: "Lato",
-          fontSize: "30px",
-          fontWeight: 400,
-          lineHeight: "36px",
-          letterSpacing: 0.25,
-        }}
-      >
-        {title || ""}
+      <div className="title-container">
+        <p
+          className="heading"
+          style={{
+            color: "#454545",
+            fontFamily: "Lato",
+            fontSize: titleFontSize || "25px",
+            fontWeight: titleFontWeight,
+            lineHeight: "36px",
+            letterSpacing: 0.25,
+          }}
+        >
+          {title || ""}
+        </p>
+        {dateCheck && <span className="current-date">{currentDate}</span>}
+      </div>
+      <div className="actions">
         {refreshText && (
-          <span
-            style={{
-              color: "var(--primary_color)",
-              fontFamily: "Lato",
-              fontSize: "14px",
-              fontWeight: 400,
-              lineHeight: "16.8px",
-              letterSpacing: 0.15,
-              marginLeft: "8px",
-            }}
-          >
+          <span className="refresh-text">
             {`Data available as of ${refreshText}`}
             <IconButton
               sx={{
@@ -63,17 +57,16 @@ export const AppHeading = ({
             </IconButton>
           </span>
         )}
-      </p>
-
-      {showButton && (
-        <AppButton
-          buttonTitle={buttonTitle}
-          onClick={onClick}
-          borderRadius={10}
-          backgroundColor={"var(--primary_color)"}
-          disabled={disabled}
-        />
-      )}
+        {showButton && (
+          <AppButton
+            buttonTitle={buttonTitle}
+            onClick={onClick}
+            borderRadius={10}
+            backgroundColor={"var(--primary_color)"}
+            disabled={disabled}
+          />
+        )}
+      </div>
     </div>
   );
 };

@@ -25,6 +25,9 @@ import SolarPanelBackground from "../assets/images/SolarPanel1.png";
 import stationVendor from "../assets/images/stationVendor.png";
 import backgroundAuth from "../assets/images/background-auth.jpeg";
 import loginSide from "../assets/images/login-side.jpeg";
+import DashboardDocImg from "../assets/images/dashboardDocImg.jpeg";
+import DashboardPatImg from "../assets/images/dasboardPatImg.png";
+import AppointmentImg from "../assets/images/ScheduleAppImg.jpeg";
 export {
   chngPass,
   Battery,
@@ -53,4 +56,7 @@ export {
   stationVendor,
   backgroundAuth,
   loginSide,
+  DashboardDocImg,
+  DashboardPatImg,
+  AppointmentImg,
 };

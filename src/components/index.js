@@ -2,8 +2,11 @@ export { default as Footer } from "./Nav/Footer";
 
 // Container
 export * from "./Container/AppContainer";
-
 export * from "./Loader/Loader";
+
+//Profile
+export * from "./Profile/SideProfileDoc";
+export * from "./Profile/SideProfilePat";
 
 // Header
 export * from "./Header/AuthHeader";
@@ -27,14 +30,13 @@ export * from "./Headings/AppHeading";
 export * from "./Cards/OverviewCard";
 export * from "./Cards/OverviewInfo";
 export * from "./Cards/SiteCard";
-export * from "./Cards/AlarmCard";
-export * from "./Cards/EquipmentCard";
+
 export * from "./Cards/EquipmentInfo";
-export * from "./Cards/DeviceDetInfo";
+
 export * from "./Cards/SpecsInfo";
-export * from "./Cards/SpecsCard";
+
 export * from "./Cards/CommonCard";
-export * from "./Cards/EquipDetCard";
+
 export * from "./Cards/VoltCurrentCard";
 export * from "./Cards/PreReportCard";
 export * from "./Cards/DropDownCard";
@@ -93,23 +95,14 @@ export * from "./CheckBox/CheckBox";
 //Calendar Component
 export * from "./CustomComponents/CalendarComponent";
 export * from "./CustomComponents/MapComponent";
-export * from "./CustomComponents/AddFormComponents/Step0Comp";
-export * from "./CustomComponents/AddFormComponents/Step1Comp";
-export * from "./CustomComponents/AddFormComponents/Step2Comp";
-export * from "./CustomComponents/AddFormComponents/Step3Comp";
+
 export * from "./CustomComponents/WeatherComponent";
-export * from "./CustomComponents/InductionData/InductionStep0Comp";
-export * from "./CustomComponents/InductionData/InductionStep1Comp";
-export * from "./CustomComponents/InductionData/InductionStep2Comp";
-export * from "./CustomComponents/InductionData/InductionStep3Comp";
+
 //Add Alarm Component
 export * from "./CustomComponents/AddAlarmComponents/AddAlarmComp";
 
 //Add User Component
 export * from "./CustomComponents/AddUserComponents/AddUserComp";
-
-//Update User Component
-export * from "./CustomComponents/UpdateUserComponents/UpdateUserComp";
 
 //noDataFound
 export * from "./NoDataFound/NoDataFound";

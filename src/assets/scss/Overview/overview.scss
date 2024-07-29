@@ -1,32 +1,3 @@
-.cardContainer {
-  background-color: var(--b2);
-  padding: 0px 0px 0px 0px;
-  width: 100%;
-  border-radius: 10px;
-  padding: 20px;
-
-  .rightCon {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-  .leftCon {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .solarImage {
-    max-width: 100%;
-    max-height: 100%;
-  }
-}
-
-.chart-container {
-  width: 100%;
-  height: 400px;
-  overflow: auto;
-}
-
 .ovCard1Main {
   display: flex;
   // flex-direction: column;
@@ -79,121 +50,75 @@
   }
 }
 
-.ovCard2Main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  background-color: #454545;
+.overviewCommonCardCon {
+  background-color: var(--w1);
   border-radius: 8px;
-  padding: 10px 20px 10px 20px;
-  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.25);
-  flex: 1;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: var(--primary_color);
-  }
-  .ovCard2Title {
-    font-size: 14px;
-    color: white;
-  }
-  .ovCard2Value {
-    font-size: 24px;
-    margin-top: 5px;
-    color: white;
-  }
-  .ovCard2Con {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    .ovCard2Unit {
-      margin-left: 5px;
-      margin-right: 5px;
-      font-size: 14px;
-      color: white;
-    }
-  }
-}
-.ovPeriodCon {
-  margin-top: 10;
-  margin-bottom: 10;
-}
-.ovProgressCon {
-  display: flex;
-  // background-color: yellow;
+  padding: 24px 16px 24px 16px;
+  width: 100%;
   height: 100%;
-  // justify-content: center;
-  flex-direction: column;
-  border-radius: 10px;
-  padding: 8px 20px 0px 20px;
-  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.25);
-  .ovProgressTitle {
-    font-family: "poppinsSemiBold";
-    color: var(--b1);
-    font-size: 14px;
-  }
-  .ovProgressChartCon {
-    flex-direction: row;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.leftSide {
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
-}
 
-.ovCard3Main {
-  display: flex;
-  // flex-direction: column;
-  // justify-content: flex-start;
-  // align-items: flex-end;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #454545;
-  border-radius: 10px;
-  padding: 16px 16px 16px 16px;
-  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.25);
-  height: 100%;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: var(--primary_color);
-  }
-
-  .ovCard1UpperCon {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .ovCard1LowerCon {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-  }
-
-  .ovCard1Title {
-    font-family: "poppinsSemiBold";
-    color: white;
+  h4 {
     font-size: 20px;
   }
+}
 
-  .ovCard1Unit {
-    font-size: 14px;
-    color: white;
-    margin: 0px 5px 0px 5px;
+//........................overview card 2 scss...............................
+.ovCard2Main {
+  background: linear-gradient(135deg, #2a2a2a, #4e5faf); // Gradient background
+  border-radius: 12px; // Rounded corners
+  padding: 20px; // Padding for spacing
+  display: flex;
+  flex-direction: column;
+  cursor: pointer; // Indicate clickable
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); // Depth shadow
+  transition: background 0.3s ease, box-shadow 0.3s ease; // Smooth transitions
+
+  &:hover {
+    background: linear-gradient(135deg, #1a1a1a, #4e5faf); // Gradient on hover
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); // Enhanced shadow on hover
   }
-  .ovCard1Value {
-    font-size: 24px;
-    margin-top: 5px;
-    color: white;
-  }
-  .ptbtnCon {
-    padding: 10px !important;
-    display: flex;
-    background-color: red !important;
-  }
+}
+
+.valueBoxCol {
+  display: flex;
+  align-items: center; // Center vertically
+  justify-content: center; // Center horizontally
+}
+
+.valueBox {
+  display: flex;
+  align-items: center;
+  justify-content: center; // Center-align the count inside the box
+  background-color: #333333; // Darker background for value box
+  border-radius: 12px; // Rounded corners
+  padding: 12px 24px; // Padding inside the box
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Subtle shadow for depth
+}
+
+.titleCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Center vertically
+  justify-content: center; // Center horizontally
+  text-align: center; // Center-align text
+}
+
+.titleCol .titleAndMessage h4 {
+  font-size: 22px; // Title font size
+  font-weight: 700; // Bold title
+  margin-bottom: 12px; // Space below the title
+}
+
+.titleCol .titleAndMessage p {
+  font-size: 18px; // Message font size
+  font-weight: 400; // Normal weight
+  line-height: 1.5; // Improve readability
+}
+
+.valueBox span {
+  font-size: 36px; // Font size for emphasis
+  color: white;
+  font-weight: 700; // Bold for emphasis
 }

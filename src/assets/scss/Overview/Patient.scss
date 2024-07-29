@@ -1,0 +1,80 @@
+.PatientDashboard-container {
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+}
+
+.PatientContent-column {
+  display: flex;
+  flex-direction: column;
+  padding-right: 20px;
+  flex: 1;
+}
+
+.PatientContent-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.PatientContent-left {
+  padding: 20px;
+}
+
+.PatientContent-left {
+  flex: 1;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.PatientContent-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.PatientDashboard-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.PatientDashboard-content {
+  text-align: left;
+}
+
+.PatientDashboard-title {
+  font-size: 25px;
+  color: #4e5faf;
+  margin-bottom: 30px;
+}
+.PatientDashboard-text {
+  margin-left: 40px;
+  .PatientDashboard-message1 {
+    font-size: 15px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  .PatientDashboard-message {
+    font-size: 15px;
+    color: #333;
+    margin-top: 10px;
+  }
+}
+
+.PatientIcon {
+  font-size: 1.5rem;
+  color: #4e5faf;
+  margin-right: 10px;
+}
+
+.PatientProfile-column {
+  display: flex;
+  align-items: flex-start;
+  width: 300px;
+}

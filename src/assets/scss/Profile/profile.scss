@@ -1,0 +1,126 @@
+.ProfileComp {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: pink; /* Moved background color here */
+
+  .profile-header {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center horizontally */
+    margin-bottom: 20px;
+    text-align: center; /* Center text */
+
+    .profile-picture {
+      width: 80px; /* Adjust size if needed */
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px; /* Space between image and title */
+    }
+
+    .profile-title {
+      font-size: 1.5rem;
+      color: #4e5faf;
+      margin: 0; /* Remove margin to keep title close to the image */
+    }
+  }
+
+  .profile-details {
+    .profile-name {
+      font-size: 1.2rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .profile-speciality {
+      font-size: 1rem;
+      color: #777;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .profile-header {
+      flex-direction: column; /* Ensure column layout on mobile */
+    }
+
+    .profile-title {
+      font-size: 1.2rem; /* Adjust font size on mobile */
+    }
+  }
+}
+
+.patient-profile {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  .patient-profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: center;
+
+    .patient-profile-picture {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px; // Make the profile picture boundary square
+      margin-bottom: 10px;
+      border: 3px solid #fff;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); // Add black shadow
+    }
+
+    .patient-profile-name {
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 10px;
+
+      .dear {
+        font-weight: bold;
+      }
+
+      .name {
+        color: #4e5faf;
+      }
+    }
+  }
+
+  .patient-profile-details {
+    .contact-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      font-size: 12px; // Smaller font size for contact values
+      color: #333;
+      justify-content: flex-start;
+      width: 100%;
+      box-sizing: border-box;
+
+      .contact-icon {
+        margin-right: 100px;
+      }
+
+      .contact-value {
+        margin-left: 4px;
+        word-wrap: break-word;
+        word-break: break-all;
+        overflow-wrap: break-word;
+        hyphens: auto;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .patient-profile-header {
+      flex-direction: column;
+    }
+  }
+}

@@ -1,6 +1,16 @@
 // Login
 @import "./Auth/login.scss";
+@import "./SignUp/signup.scss";
 
+//Overview
+@import "./Profile/profile.scss";
+
+//Overview
+@import "./Overview/doctor.scss";
+@import "./Overview/overview.scss";
+@import "./Overview/Patient.scss";
+@import "./PatientAppointment/AppointmentForm.scss";
+//////////////////
 // Utils
 @import "./utils/colors";
 @import "./utils/common";
@@ -11,8 +21,7 @@
 @import "./Component/sidenav";
 @import "./Component/commonStyle.scss";
 @import "./Component/specsInfo.scss";
-@import "./Component/specsCard.scss";
-@import "./Component/alarmCard.scss";
+
 @import "./Component/overviewInfo.scss";
 @import "./Component/commonCard.scss";
 @import "./Component/equipmentCard.scss";
@@ -27,35 +36,6 @@
 @import "./Component/loader.scss";
 @import "./Component/appInput.scss";
 @import "./Component/weatherComponent.scss";
-@import "./Component/overviewCommonCard.scss";
-
-// Operations
-@import "./Operations/operations.scss";
-
-//Overview
-@import "./Overview/overview.scss";
-
-//Equipment
-@import "./Equipments/equipments.scss";
-
-//Alarms
-@import "./Alarms/alarms.scss";
-
-//Testing
-@import "./Testing/testing.scss";
-
-//Sites
-@import "./Sites/siteDetail.scss";
 
 //Error
 @import "./Error/error.scss";
-
-//Induction
-@import "./Induction/induction.scss";
-@import "./Induction/inductionDetail.scss";
-
-//Contact Us
-@import "./ContactUs//contactUs.scss";
-
-//vendor
-@import "./Vendor//vendor.scss";

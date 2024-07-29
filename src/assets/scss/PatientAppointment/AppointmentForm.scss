@@ -1,0 +1,123 @@
+.appointment-form {
+  .content-rows {
+    display: flex;
+    flex-direction: row; // Ensure columns are side by side
+    align-items: center;
+    justify-content: center; // Center the content horizontally
+
+    .form-column {
+      flex: 1;
+      margin: 0 5px; // Reduce margin to fit better
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      z-index: 2; // Ensure it stays above the background image
+      max-width: 450px; // Adjusted max-width for better proportion
+      overflow-y: auto; // Add vertical scrollbar if content overflows
+      height: calc(
+        100vh - 80px
+      ); // Adjust height to fit the viewport minus padding
+      position: relative; // Ensure progress bar is relative to this column
+
+      .progress-bar {
+        position: sticky; // Make it stick within the column
+        top: 0;
+        background-color: #4e5faf;
+        height: 5px; // Make it a thin line
+        width: 100%;
+        border-radius: 5px; // Rounded corners
+        z-index: 3; // Ensure it stays above other content
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: width 0.3s ease-in-out; // Smooth transition
+      }
+    }
+
+    .image-columns {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden; // Hide overflowing parts of the image
+
+      .image-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 200%; // Make the container wider to fit the moving image
+
+        img {
+          max-width: 100%; // Make the image half the width of the container
+          height: auto;
+          object-fit: cover;
+          animation: moveImage 10s linear infinite; // Apply animation
+        }
+      }
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 1rem;
+
+      .input-icon {
+        display: flex;
+        align-items: center;
+
+        .icon {
+          position: absolute;
+          right: 10px; // Position icon on the right
+          color: #4e5faf; // Match icon color with form field color
+        }
+
+        .ant-input,
+        .ant-picker {
+          padding-right: 2.5rem; // Space for the icon
+        }
+      }
+
+      .label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+
+      .error {
+        color: #ff4d4f;
+        font-size: 12px;
+        margin-top: 8px;
+        margin-bottom: 12px;
+      }
+    }
+
+    .submit-button {
+      margin-top: 1rem;
+    }
+  }
+
+  // Responsive Design
+  @media (max-width: 768px) {
+    .content-rows {
+      flex-direction: column; // Stack columns vertically on smaller screens
+    }
+
+    .form-column,
+    .image-columns {
+      margin: 10px 0; // Reduce margin on smaller screens
+    }
+
+    .form-column {
+      max-width: 100%; // Make form column full width on smaller screens
+    }
+  }
+
+  // Keyframes for moving the image
+  @keyframes moveImage {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}

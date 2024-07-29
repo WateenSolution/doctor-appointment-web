@@ -1,42 +1,53 @@
-import { DatePicker } from "antd";
-import { ErrorMessage } from "formik";
 import React from "react";
+import moment from "moment";
+import { TimePicker, Space } from "antd";
 
-export const DateIntervalInput = ({
-  label,
-  value,
-  defaultValue,
-  vldName,
-  mT,
-  placeholder,
-  onSelect,
-}) => {
-  const { RangePicker } = DatePicker;
+const { RangePicker } = TimePicker;
 
-  const dateInputStyles = {
-    boxShadow: "0 7px 15px var(--gr10)",
-    width: "100%",
-    marginTop: "5px",
-    borderRadius: "5px",
-    borderColor: "transparent",
-    height: "42px" || "auto",
+export const DateIntervalInput = ({ value, onSelect }) => {
+  const handleChange = (times) => {
+    if (times) {
+      const [start, end] = times;
+      const today = moment().startOf("day");
+      onSelect([
+        {
+          start: today
+            .clone()
+            .set({
+              hour: start.hour(),
+              minute: start.minute(),
+              second: start.second(),
+            })
+            .toISOString(),
+          end: today
+            .clone()
+            .set({
+              hour: end.hour(),
+              minute: end.minute(),
+              second: end.second(),
+            })
+            .toISOString(),
+        },
+      ]);
+    } else {
+      onSelect([]);
+    }
   };
+
   return (
-    <div className="appInputCon">
-      <div className={`form-group  mt-1`}>
-        <label className="labelText">{label}</label>
-        <RangePicker
-          onChange={(dates, dateStrings) => {
-            onSelect(dateStrings);
-          }}
-          style={dateInputStyles}
-          size={"large"}
-          value={value}
-          defaultValue={defaultValue}
-          // bordered={false}
-        />
-        <ErrorMessage name={vldName} component="div" className="error" />
-      </div>
-    </div>
+    <Space direction="vertical" size={12}>
+      <RangePicker
+        value={
+          value.length > 0
+            ? [
+                value[0].start ? moment(value[0].start) : null,
+                value[0].end ? moment(value[0].end) : null,
+              ]
+            : []
+        }
+        onChange={handleChange}
+        format="HH:mm:ss" // Formats the display of time
+      />
+    </Space>
   );
 };
