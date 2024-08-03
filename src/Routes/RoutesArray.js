@@ -8,6 +8,7 @@ import {
   ResetPassword,
   DashboardPatient,
   PatientAppointment,
+  PatientMyAppoint,
 } from "../Pages";
 
 export const My_Routes = {
@@ -67,8 +68,16 @@ export const My_Routes = {
       component: <DashboardPatient />,
     },
     {
+      path: "/appointment-form/:id",
+      component: <PatientAppointment />,
+    },
+    {
       path: "/appointment-form",
       component: <PatientAppointment />,
+    },
+    {
+      path: "/my-appointment",
+      component: <PatientMyAppoint />,
     },
   ],
 

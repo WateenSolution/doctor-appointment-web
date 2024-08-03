@@ -39,7 +39,7 @@ export const ProfilePatComp = ({
             </Card>
           </Col>
           <Col span={24}>
-            <Card className="contact-item">
+            <Card className="contact-item" style={{ marginBottom: "20px" }}>
               <Row style={{ alignItems: "center" }}>
                 <Col span={4}>
                   <FaEnvelope className="contact-icon" />
@@ -60,8 +60,8 @@ export const ProfilePatComp = ({
             <OverviewCommonCard
               title="Schedules"
               bgColor="#F0F0F0"
-              titleFontSize={20}
-              titleFontWeight={800}
+              titleFontSize={18}
+              titleFontWeight={700}
               titleFontFamily="Lato"
               titleLineHeight="36px"
               titleLetterSpacing={0.25}

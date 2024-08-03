@@ -6,13 +6,22 @@ export const sideBarItems = [
     title: "Dashboard",
     icon: "home",
     path: "/",
+
     roles: ["Doctor", "Patient"],
   },
   {
     id: 1,
-    title: "Appointment",
+    title: "Book Appointment",
     icon: "appointment",
     path: "/appointment-form",
+    sub_path: "/appointment-form/:id",
+    roles: ["Patient"],
+  },
+  {
+    id: 2,
+    title: "My Appointment",
+    icon: "myAppointment",
+    path: "/my-appointment",
     roles: ["Patient"],
   },
 ];

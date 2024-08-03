@@ -61,8 +61,8 @@ const ForgotPassword = () => {
         role === "Doctor"
           ? JSON.stringify(
               values.availabilityTiming.map((timing) => ({
-                start: moment(timing.start).toISOString(),
-                end: moment(timing.end).toISOString(),
+                start: moment(timing.start).format("HH:mm:ss"),
+                end: moment(timing.end).format("HH:mm:ss"),
               }))
             )
           : undefined,

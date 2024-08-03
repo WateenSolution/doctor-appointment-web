@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { CustomTextBox } from "../CustomComponents/CustomTextBox";
 import { profile } from "../../utilities";
 import {
@@ -11,6 +12,7 @@ import { Tooltip } from "antd";
 import { motion } from "framer-motion";
 
 export const DoctorListCard = ({
+  id, // Add the doctor's ID as a prop
   title,
   iconSrc,
   value,
@@ -25,6 +27,8 @@ export const DoctorListCard = ({
   description,
   totalReviews,
 }) => {
+  const navigate = useNavigate();
+
   // Helper function to render rating stars
   const renderRatingStars = () => {
     const stars = [];
@@ -41,6 +45,15 @@ export const DoctorListCard = ({
       );
     }
     return stars;
+  };
+
+  // Click handler for the calendar icon
+  const handleCalendarClick = () => {
+    navigate(`/appointment-form/${id}`, {
+      state: {
+        data: { id },
+      },
+    });
   };
 
   return (
@@ -156,7 +169,10 @@ export const DoctorListCard = ({
         </div>
         <div className="additionalIcons">
           <Tooltip title="Appointment">
-            <CalendarOutlined style={{ fontSize: "20px", color: "#fff" }} />
+            <CalendarOutlined
+              style={{ fontSize: "20px", color: "#fff", cursor: "pointer" }}
+              onClick={handleCalendarClick} // Add click handler for calendar icon
+            />
           </Tooltip>
           <Tooltip title="Favorites">
             <MessageOutlined style={{ fontSize: "20px", color: "#fff" }} />

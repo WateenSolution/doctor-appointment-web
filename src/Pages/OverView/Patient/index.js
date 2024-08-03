@@ -111,19 +111,12 @@ const DashboardPatient = () => {
             </Row>
 
             <Row>
-              <OverviewCommonCard
-                bgColor="#F0F0F0"
-                titleFontSize={20}
-                titleFontWeight={800}
-                titleFontFamily="Lato"
-                titleLineHeight="36px"
-                titleLetterSpacing={0.25}
-              >
+              <OverviewCommonCard bgColor="#F0F0F0">
                 <Col span={24}>
                   <Select
                     placeholder="Filter by Specialization"
                     onChange={handleFilterChange}
-                    style={{ width: "100%", marginBottom: "20px" }}
+                    style={{ width: "100%", marginBottom: "10px" }}
                   >
                     <Option value="Cardiology">Cardiology</Option>
                     <Option value="Dermatology">Dermatology</Option>
@@ -133,23 +126,25 @@ const DashboardPatient = () => {
                     {/* Add more options as needed */}
                   </Select>
                 </Col>
-                {filterOrDocDetail?.getAllFilterDoc?.map((doctor, index) => (
-                  <DoctorListCard
-                    key={index}
-                    title={doctor.username}
-                    iconSrc={doctor.image}
-                    value={doctor.qualification_specialisation}
-                    valUnit="Speciality"
-                    icoHeight={60}
-                    icoWidth={60}
-                    mT={20}
-                    mL={20}
-                    con_mT={10}
-                    rating={doctor.average_rating}
-                    description={doctor.about}
-                    totalReviews={doctor.total_reviews}
-                  />
-                ))}
+                <div className="doctor-list-container">
+                  {filterOrDocDetail?.getAllFilterDoc?.map((doctor, index) => (
+                    <DoctorListCard
+                      key={index}
+                      title={doctor.username}
+                      iconSrc={doctor.image}
+                      value={doctor.qualification_specialisation}
+                      valUnit="Speciality"
+                      icoHeight={60}
+                      icoWidth={60}
+                      mT={20}
+                      id={doctor.id}
+                      con_mT={10}
+                      rating={doctor.average_rating}
+                      description={doctor.about}
+                      totalReviews={doctor.total_reviews}
+                    />
+                  ))}
+                </div>
               </OverviewCommonCard>
             </Row>
           </Col>

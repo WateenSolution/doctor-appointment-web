@@ -54,7 +54,7 @@
   margin-bottom: 10px;
   background-color: var(--w1);
   border-radius: 8px;
-  padding: 16px 16px 16px 16px;
+  padding: 10px 16px 16px 16px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -68,8 +68,8 @@
 //........................overview card 2 scss...............................
 .ovCard2Main {
   background: linear-gradient(135deg, #2a2a2a, #4e5faf); // Gradient background
-  border-radius: 12px; // Rounded corners
-  padding: 20px; // Padding for spacing
+  border-radius: 12px;
+  padding: 10px 20px 10px 20px;
   display: flex;
   flex-direction: column;
   cursor: pointer; // Indicate clickable

@@ -11,4 +11,11 @@ export const ENDPOINTS = {
   //Dashboard
   GET_DASHBOARD_DETAIL: "/dashboard/get-person-info",
   FILTER_ALL_DOC: "/dashboard/filter-Or-All-Doc",
+
+  //appointment
+  GET_USER_BY_ID: "/appointment/get-user",
+  AVAILABLE_TIME_STATUS: "/appointment/status-available-time",
+  GET_APPOINT_BOOK_TIME: "/appointment/get-appoint-time",
+  ADD_APPOINT_FORM: "/appointment/add-patient-form",
+  GET_PAT_APPOINT_LIST: "/appointment/get-pat-app-list",
 };

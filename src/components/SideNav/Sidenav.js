@@ -25,7 +25,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../redux/actions";
 import { sideBarItems } from "../../utilities/constant";
 import { logo } from "../../utilities";
-import { HomeIcon, LogoutIcon, AppointmentIcon } from "../../components";
+import {
+  HomeIcon,
+  LogoutIcon,
+  BookAppointmentIcon,
+  MyAppointmentIcon,
+} from "../../components";
 
 const drawerWidth = 250;
 
@@ -97,7 +102,10 @@ const renderMenu = (viewOption, color) => {
     case "home":
       return <HomeIcon height={20} width={20} fill={color} />;
     case "appointment":
-      return <AppointmentIcon height={20} width={20} fill={color} />;
+      return <BookAppointmentIcon height={20} width={20} fill={color} />;
+
+    case "myAppointment":
+      return <MyAppointmentIcon height={20} width={20} fill={color} />;
     default:
       return null;
   }
@@ -157,7 +165,6 @@ export default function Sidenav(props) {
 
   return (
     <Box sx={{ display: "flex", height: "100vh" }}>
-      {" "}
       {/* Ensure the Box takes full height */}
       <CssBaseline />
       <Drawer variant="permanent" open={open}>
@@ -193,7 +200,10 @@ export default function Sidenav(props) {
                   <ListItemButton
                     component={Link}
                     to={item?.path}
-                    selected={location.pathname === item?.path}
+                    selected={
+                      location.pathname === item?.path ||
+                      location?.pathname === item?.sub_path
+                    }
                     sx={{
                       minHeight: 48,
                       justifyContent: open ? "initial" : "center",
@@ -215,7 +225,10 @@ export default function Sidenav(props) {
                     >
                       {renderMenu(
                         item?.icon,
-                        location.pathname === item?.path ? "#012d75" : "#fff"
+                        location.pathname === item?.path ||
+                          location?.pathname === item?.sub_path
+                          ? "#012d75"
+                          : "#fff"
                       )}
                     </ListItemIcon>
                     <ListItemText

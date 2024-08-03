@@ -9,10 +9,14 @@ export const OverviewCard2 = ({ mT, count }) => {
   const title = "Booked Appointments";
   const message = "Tap to concern your doctor.";
 
+  const handleClick = () => {
+    navigate("/appointment");
+  };
+
   return (
-    <div className="ovCard2Main">
+    <div className="ovCard2Main" onClick={handleClick}>
       <Row gutter={16} align="middle">
-        <Col span={12} className="titleCol">
+        <Col xs={24} sm={12} className="titleCol">
           <div className="titleAndMessage">
             <CustomTextBox
               text={title}
@@ -26,7 +30,7 @@ export const OverviewCard2 = ({ mT, count }) => {
             />
           </div>
         </Col>
-        <Col span={12} className="valueBoxCol">
+        <Col xs={24} sm={12} className="valueBoxCol">
           <div className="valueBox">
             <CustomTextBox
               text={count.toString()}

@@ -25,6 +25,7 @@ export * from "./Charts/ProgressLineChart";
 export * from "./Charts/CompBarCharts";
 
 //Cards
+export * from "./Cards/UpcomAppPatCard";
 export * from "./Cards/DoctorListCard";
 export * from "./Cards/OverviewCommonCard";
 export * from "./Cards/ChartCard";

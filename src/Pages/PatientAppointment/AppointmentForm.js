@@ -4,25 +4,143 @@ import {
   AppointmentFormFields,
   AppointmentVS,
   AppointmentImg,
+  networkText,
 } from "../../utilities";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { Row, Input, DatePicker, TimePicker, Card, Col, Radio } from "antd";
+import { Row, Input, Select, Card, Col, Radio } from "antd";
 import {
-  UserOutlined,
-  CalendarOutlined,
-  ClockCircleOutlined,
-  FileTextOutlined,
-} from "@ant-design/icons";
+  getUserDetAction,
+  getAppointTimeAction,
+  availableTimeStatusAction,
+  submitAppointmentFormAction,
+  getPatientAppointListAction,
+} from "../../redux/actions";
+import { UserOutlined, DollarOutlined, MailOutlined } from "@ant-design/icons";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
+const { Option } = Select;
 const { TextArea } = Input;
 
-const AppointmentForm = () => {
-  const [showSpecifyField, setShowSpecifyField] = useState(false);
+const AppointmentForm = ({ id }) => {
+  const navigate = useNavigate();
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isDateTimeEnabled, setIsDateTimeEnabled] = useState(false);
   const formColumnRef = useRef(null);
 
-  const handleDepartmentChange = (value) => {
-    setShowSpecifyField(value === "others");
+  const dispatch = useDispatch();
+  const { usersInfo, appointmentBook, statusAvailable } = useSelector(
+    (state) => state?.appointment
+  );
+
+  useEffect(() => {
+    getUserData(id);
+  }, [id]);
+
+  const getUserData = async (id) => {
+    if (navigator.onLine) {
+      const requestBody = { id: id };
+      const body = {
+        values: requestBody,
+        onSuccess: async (res) => {},
+        onFailure: (error) => {
+          toast.error(networkText);
+        },
+      };
+      dispatch(getUserDetAction(body));
+    } else {
+      toast.error(networkText);
+    }
+  };
+
+  const getAvailableTime = async (values) => {
+    if (navigator.onLine) {
+      const requestBody = {
+        name: values,
+      };
+
+      const body = {
+        values: requestBody,
+        onSuccess: async (res) => {},
+        onFailure: (error) => {
+          toast.error(networkText);
+        },
+      };
+
+      dispatch(getAppointTimeAction(body));
+    } else {
+      toast.error(networkText);
+    }
+  };
+  const addAppForm = async (values, id) => {
+    if (navigator.onLine) {
+      const selectedDoctor = usersInfo.find(
+        (doctor) => doctor.id === values?.doctor
+      );
+      const doctor = selectedDoctor?.username;
+      const { firstName, lastName, appointmentTime, notes } = values; // Extract values
+
+      const requestBody = {
+        firstName,
+        lastName,
+        doctor,
+        appointmentTime,
+        notes,
+      };
+
+      const body = {
+        values: requestBody,
+        onSuccess: async (res) => {
+          addAvailableTime(doctor, appointmentTime);
+        },
+        onFailure: (error) => {
+          toast.error(networkText);
+        },
+      };
+
+      dispatch(submitAppointmentFormAction(body));
+    } else {
+      toast.error(networkText);
+    }
+  };
+
+  const addAvailableTime = async (doctor, appointmentTime) => {
+    if (navigator.onLine) {
+      const requestBody = {
+        name: doctor,
+        time: appointmentTime,
+      };
+
+      const body = {
+        values: requestBody,
+        onSuccess: async (res) => {
+          toast.success("Appointment Booked Successfully");
+          navigate("/");
+        },
+        onFailure: (error) => {
+          toast.error(networkText);
+        },
+      };
+
+      dispatch(availableTimeStatusAction(body));
+    } else {
+      toast.error(networkText);
+    }
+  };
+  const handleDoctorChange = (value, setFieldValue) => {
+    setFieldValue("doctor", value);
+    setIsDateTimeEnabled(!!value);
+
+    if (value) {
+      const selectedDoctor = usersInfo.find((doctor) => doctor.id === value);
+      if (selectedDoctor) {
+        console.log("fields", selectedDoctor);
+        getAvailableTime(selectedDoctor?.username);
+        setFieldValue("doctorFee", selectedDoctor.doctor_fee || "");
+        setFieldValue("doctorEmail", selectedDoctor.email || "");
+      }
+    }
   };
 
   const updateScrollProgress = () => {
@@ -48,12 +166,6 @@ const AppointmentForm = () => {
     };
   }, []);
 
-  const onSubmit = (values, { setSubmitting }) => {
-    // Handle form submission here
-    console.log(values);
-    setSubmitting(false);
-  };
-
   return (
     <div className="appointment-form">
       <Row gutter={16} className="content-rows">
@@ -66,12 +178,11 @@ const AppointmentForm = () => {
             <Formik
               initialValues={AppointmentFormFields}
               validationSchema={AppointmentVS}
-              onSubmit={onSubmit}
+              onSubmit={addAppForm}
             >
-              {({ handleSubmit, setFieldValue, values }) => (
+              {({ handleSubmit, setFieldValue }) => (
                 <Form onSubmit={handleSubmit}>
                   <div className="form-content">
-                    {/* Form fields go here */}
                     <Row gutter={16}>
                       <Col span={24}>
                         <div className="form-group">
@@ -120,15 +231,24 @@ const AppointmentForm = () => {
                         <div className="form-group">
                           <label className="label">Doctor</label>
                           <div className="input-icon">
-                            <UserOutlined className="icon" />
-                            <Field
-                              name="doctor"
-                              as={Input}
-                              placeholder="Doctor"
-                              onChange={(e) => {
-                                setFieldValue("doctor", e.target.value);
-                              }}
-                            />
+                            <Field name="doctor">
+                              {({ field }) => (
+                                <Select
+                                  {...field}
+                                  style={{ width: "100%" }}
+                                  placeholder="Select Doctor"
+                                  onChange={(value) =>
+                                    handleDoctorChange(value, setFieldValue)
+                                  }
+                                >
+                                  {(usersInfo || []).map((doctor) => (
+                                    <Option key={doctor.id} value={doctor.id}>
+                                      {doctor.username}
+                                    </Option>
+                                  ))}
+                                </Select>
+                              )}
+                            </Field>
                           </div>
                           <ErrorMessage
                             name="doctor"
@@ -139,46 +259,65 @@ const AppointmentForm = () => {
                       </Col>
                     </Row>
                     <Row gutter={16}>
-                      <Col span={12}>
+                      <Col span={24}>
                         <div className="form-group">
-                          <label className="label">Appointment Date</label>
+                          <label className="label">Doctor Fee</label>
                           <div className="input-icon">
-                            <CalendarOutlined className="icon" />
-                            <Field name="appointmentDate">
-                              {({ field }) => (
-                                <DatePicker
-                                  {...field}
-                                  placeholder="Appointment Date"
-                                  style={{ width: "100%" }}
-                                  onChange={(date) => {
-                                    setFieldValue("appointmentDate", date);
-                                  }}
-                                />
-                              )}
-                            </Field>
+                            <Field
+                              name="doctorFee"
+                              as={Input}
+                              placeholder="Doctor Fee"
+                              disabled
+                            />
                           </div>
                           <ErrorMessage
-                            name="appointmentDate"
+                            name="doctorFee"
                             component="div"
                             className="error"
                           />
                         </div>
                       </Col>
-                      <Col span={12}>
+                      <Col span={24}>
+                        <div className="form-group">
+                          <label className="label">Doctor Email</label>
+                          <div className="input-icon">
+                            <Field
+                              name="doctorEmail"
+                              as={Input}
+                              placeholder="Doctor Email"
+                              disabled
+                            />
+                          </div>
+                          <ErrorMessage
+                            name="doctorEmail"
+                            component="div"
+                            className="error"
+                          />
+                        </div>
+                      </Col>
+                      <Col span={24}>
                         <div className="form-group">
                           <label className="label">Appointment Time</label>
                           <div className="input-icon">
-                            <ClockCircleOutlined className="icon" />
                             <Field name="appointmentTime">
                               {({ field }) => (
-                                <TimePicker
+                                <Select
                                   {...field}
-                                  placeholder="Appointment Time"
                                   style={{ width: "100%" }}
-                                  onChange={(time) => {
-                                    setFieldValue("appointmentTime", time);
-                                  }}
-                                />
+                                  onChange={(value) =>
+                                    setFieldValue("appointmentTime", value)
+                                  }
+                                  disabled={!isDateTimeEnabled} // Disable if no doctor is selected
+                                  placeholder="Select Appointment Time"
+                                >
+                                  {appointmentBook?.[0]?.available_slots.map(
+                                    (time) => (
+                                      <Option key={time} value={time}>
+                                        {time}
+                                      </Option>
+                                    )
+                                  )}
+                                </Select>
                               )}
                             </Field>
                           </div>
@@ -191,63 +330,21 @@ const AppointmentForm = () => {
                       </Col>
                     </Row>
                     <div className="form-group">
-                      <label className="label">Medical Department</label>
-                      <Field name="specifiedDepartment">
-                        {({ field }) => (
-                          <div>
-                            <Radio.Group
-                              {...field}
-                              onChange={(e) =>
-                                handleDepartmentChange(e.target.value)
-                              }
-                            >
-                              <Radio value="cardiology">Cardiology</Radio>
-                              <Radio value="neurology">Neurology</Radio>
-                              <Radio value="orthopedics">Orthopedics</Radio>
-                              <Radio value="others">Others</Radio>
-                            </Radio.Group>
-                            {showSpecifyField && (
-                              <Field name="specifiedDepartment">
-                                {({ field }) => (
-                                  <Input
-                                    {...field}
-                                    placeholder="Specify other department"
-                                  />
-                                )}
-                              </Field>
-                            )}
-                          </div>
-                        )}
-                      </Field>
-                      <ErrorMessage
-                        name="medicalDepartment"
-                        component="div"
-                        className="error"
+                      <label className="label">Additional Notes</label>
+                      <Field
+                        name="notes"
+                        as={TextArea}
+                        rows={4}
+                        placeholder="Comment some symptoms here..."
                       />
                     </div>
                     <div className="form-group">
-                      <label className="label">Additional Notes</label>
-                      <div className="input-icon">
-                        <FileTextOutlined className="icon" />
-                        <Field
-                          name="notes"
-                          as={TextArea}
-                          placeholder="Additional Notes"
-                          rows={4}
-                        />
-                      </div>
-                      <ErrorMessage
-                        name="notes"
-                        component="div"
-                        className="error"
+                      <LoaderButton
+                        title="Submit"
+                        onClick={handleSubmit}
+                        className="submit-button"
                       />
                     </div>
-                    <LoaderButton
-                      title="Submit"
-                      onClick={handleSubmit}
-                      // isLoading={loginLoad}
-                      className="submit-button"
-                    />
                   </div>
                 </Form>
               )}

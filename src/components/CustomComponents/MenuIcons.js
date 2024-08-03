@@ -74,7 +74,58 @@ export const LogoutIcon = ({
   );
 };
 
-export const AppointmentIcon = ({
+export const BookAppointmentIcon = ({
+  fill = "#4e5faf",
+  height = "24",
+  width = "24",
+}) => {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient
+          id="bookAppointmentGradient"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="100%"
+        >
+          <stop offset="0%" style={{ stopColor: "#4e5faf", stopOpacity: 1 }} />
+          <stop
+            offset="100%"
+            style={{ stopColor: "#1d3c6e", stopOpacity: 1 }}
+          />
+        </linearGradient>
+        <filter
+          id="bookAppointmentShadow"
+          x="0"
+          y="0"
+          width="150%"
+          height="150%"
+        >
+          <feDropShadow
+            dx="2"
+            dy="2"
+            stdDeviation="3"
+            floodColor="rgba(0, 0, 0, 0.2)"
+          />
+        </filter>
+      </defs>
+      <path
+        d="M19 2H16V0H8V2H5C3.9 2 3 2.9 3 4V21C3 22.1 3.9 23 5 23H19C20.1 23 21 22.1 21 21V4C21 2.9 20.1 2 19 2ZM5 5H19V8H5V5ZM19 21H5V10H19V21ZM12 12H14V14H16V12H18V10H16V8H14V10H12V12Z"
+        fill="url(#bookAppointmentGradient)"
+        filter="url(#bookAppointmentShadow)"
+      />
+    </svg>
+  );
+};
+
+export const MyAppointmentIcon = ({
   fill = "#4e5faf",
   height = "24",
   width = "24",
@@ -111,7 +162,7 @@ export const AppointmentIcon = ({
         </filter>
       </defs>
       <path
-        d="M19 3H16V1H8V3H5C3.9 3 3 3.9 3 5V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V5C21 3.9 20.1 3 19 3ZM5 4H6V6H5V4ZM19 20H5V8H19V20ZM13 11H11V13H13V11ZM13 15H11V17H13V15ZM16 13H14V15H16V13ZM16 17H14V19H16V17Z"
+        d="M19 2H16V0H8V2H5C3.9 2 3 2.9 3 4V21C3 22.1 3.9 23 5 23H19C20.1 23 21 22.1 21 21V4C21 2.9 20.1 2 19 2ZM17 8V10H7V8H17ZM17 14V16H13V14H17ZM7 14H11V16H7V14Z"
         fill="url(#appointmentGradient)"
         filter="url(#appointmentShadow)"
       />

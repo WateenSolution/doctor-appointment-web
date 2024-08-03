@@ -4,6 +4,7 @@ import { Fade } from "react-awesome-reveal";
 import { AppContainer, AppHeading } from "../../components";
 import PatientAppointmentForm from "../PatientAppointment/AppointmentForm"; // Import the form component
 import Box from "@mui/material/Box";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const Appoinment = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,8 @@ const Appoinment = () => {
   useEffect(() => {
     // getPatientDetail();
   }, []);
+  const params = useParams();
+  const id = params?.id || "";
 
   return (
     <AppContainer style={{ position: "relative" }}>
@@ -20,7 +23,7 @@ const Appoinment = () => {
           titleFontWeight={800}
           dateCheck={true}
         />
-        <PatientAppointmentForm />
+        <PatientAppointmentForm id={id} />
       </Box>
     </AppContainer>
   );

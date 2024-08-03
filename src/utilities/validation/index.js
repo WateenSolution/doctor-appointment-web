@@ -2,6 +2,7 @@ import * as yup from "yup";
 import dayjs from "dayjs";
 import { phoneRegExp, passwordRegExp } from "../helper";
 import { passwordMessage } from "../constant";
+import moment from "moment";
 
 export const loginFormFields = {
   username: "",
@@ -10,12 +11,11 @@ export const loginFormFields = {
 export const AppointmentFormFields = {
   firstName: "",
   lastName: "",
-  appointmentDate: "",
-  appointmentTime: "",
   doctor: "",
-  departments: [], // Use an array for selected departments
-  specifiedDepartment: "",
-  notes: "",
+  doctorFee: "", // Added this field
+  doctorEmail: "", // Added this field
+  appointmentTime: "", // Added this field
+  notes: "", // Added this field
 };
 
 export const chngPassFormFields = {
@@ -326,37 +326,18 @@ export const ChngPassVS = yup.object().shape({
     .matches(passwordRegExp, passwordMessage),
 });
 
-export const AppointmentVS = yup.object({
+export const AppointmentVS = yup.object().shape({
   firstName: yup
     .string()
     .required("First Name is required")
-    .min(2, "First Name is too short"),
-
+    .min(2, "First Name must be at least 2 characters"),
   lastName: yup
     .string()
     .required("Last Name is required")
-    .min(2, "Last Name is too short"),
-
-  appointmentDate: yup
-    .date()
-    .required("Appointment Date is required")
-    .min(new Date(), "Appointment Date cannot be in the past"),
-
-  appointmentTime: yup.string().required("Appointment Time is required"),
-
-  doctor: yup
-    .string()
-    .required("Doctor is required")
-    .min(2, "Doctor Name is too short"),
-
-  departments: yup.array().min(1, "At least one department is required"),
-
-  specifiedDepartment: yup.string().when("departments", {
-    is: (departments) => departments.includes("others"),
-    then: yup.string().required("Please specify the department"),
-  }),
-
-  notes: yup.string().max(500, "Notes cannot exceed 500 characters"),
+    .min(2, "Last Name must be at least 2 characters"),
+  doctor: yup.string().required("Please select a doctor"),
+  appointmentTime: yup.string().required("Please select an appointment time"),
+  notes: yup.string().required("Please provide additional notes"), // Add this line
 });
 
 export const ForgotPasswordVS = (role) => {
@@ -384,8 +365,32 @@ export const ForgotPasswordVS = (role) => {
       role === "Doctor"
         ? yup.array().of(
             yup.object().shape({
-              start: yup.string().required("Start time is required"),
-              end: yup.string().required("End time is required"),
+              start: yup
+                .string()
+                .required("Start time is required")
+                .test(
+                  "is-today-or-later",
+                  "Start time must be today or later",
+                  (value) => {
+                    return moment(value, "HH:mm").isSameOrAfter(
+                      moment(),
+                      "minute"
+                    );
+                  }
+                ),
+              end: yup
+                .string()
+                .required("End time is required")
+                .test(
+                  "is-after-start",
+                  "End time must be after start time",
+                  function (value) {
+                    const { start } = this.parent;
+                    return moment(value, "HH:mm").isAfter(
+                      moment(start, "HH:mm")
+                    );
+                  }
+                ),
             })
           )
         : yup.array().nullable(),
