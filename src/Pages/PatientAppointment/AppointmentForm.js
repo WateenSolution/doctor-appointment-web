@@ -11,11 +11,9 @@ import { Row, Input, Select, Card, Col, Radio } from "antd";
 import {
   getUserDetAction,
   getAppointTimeAction,
-  availableTimeStatusAction,
   submitAppointmentFormAction,
-  getPatientAppointListAction,
 } from "../../redux/actions";
-import { UserOutlined, DollarOutlined, MailOutlined } from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -30,7 +28,7 @@ const AppointmentForm = ({ id }) => {
   const formColumnRef = useRef(null);
 
   const dispatch = useDispatch();
-  const { usersInfo, appointmentBook, statusAvailable } = useSelector(
+  const { usersInfo, appointmentBook } = useSelector(
     (state) => state?.appointment
   );
 
@@ -92,7 +90,8 @@ const AppointmentForm = ({ id }) => {
       const body = {
         values: requestBody,
         onSuccess: async (res) => {
-          addAvailableTime(doctor, appointmentTime);
+          toast.success("Appointment Booked Successfully");
+          navigate("/");
         },
         onFailure: (error) => {
           toast.error(networkText);
@@ -105,29 +104,6 @@ const AppointmentForm = ({ id }) => {
     }
   };
 
-  const addAvailableTime = async (doctor, appointmentTime) => {
-    if (navigator.onLine) {
-      const requestBody = {
-        name: doctor,
-        time: appointmentTime,
-      };
-
-      const body = {
-        values: requestBody,
-        onSuccess: async (res) => {
-          toast.success("Appointment Booked Successfully");
-          navigate("/");
-        },
-        onFailure: (error) => {
-          toast.error(networkText);
-        },
-      };
-
-      dispatch(availableTimeStatusAction(body));
-    } else {
-      toast.error(networkText);
-    }
-  };
   const handleDoctorChange = (value, setFieldValue) => {
     setFieldValue("doctor", value);
     setIsDateTimeEnabled(!!value);

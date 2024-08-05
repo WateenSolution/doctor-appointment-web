@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getDashboardDetailAction, getFilterOrAllDoc } from "../../actions";
+import {
+  getDashboardDetailAction,
+  getFilterOrAllDoc,
+  getBookedPatientAction,
+} from "../../actions";
 
 const initialState = {
   dashboardLoad: false,
@@ -34,12 +38,26 @@ const DashboardSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getFilterOrAllDoc.fulfilled, (state, { payload }) => {
-      console.log("payload of filter data is", payload);
       state.filterDataLoader = false;
       state.filterOrDocDetail = payload?.data;
     });
 
     builder.addCase(getFilterOrAllDoc.rejected, (state, { payload }) => {
+      state.filterDataLoader = false;
+      state.error = payload;
+    });
+
+    builder.addCase(getBookedPatientAction.pending, (state, { payload }) => {
+      state.filterDataLoader = true;
+      state.error = null;
+    });
+    builder.addCase(getBookedPatientAction.fulfilled, (state, { payload }) => {
+      console.log("Patient booked data is", payload);
+      state.filterDataLoader = false;
+      state.bookedPatient = payload?.data;
+    });
+
+    builder.addCase(getBookedPatientAction.rejected, (state, { payload }) => {
       state.filterDataLoader = false;
       state.error = payload;
     });

@@ -11,6 +11,7 @@ export const ENDPOINTS = {
   //Dashboard
   GET_DASHBOARD_DETAIL: "/dashboard/get-person-info",
   FILTER_ALL_DOC: "/dashboard/filter-Or-All-Doc",
+  GET_BOOKED_PATIENT: "/dashboard/get-booked-patient",
 
   //appointment
   GET_USER_BY_ID: "/appointment/get-user",

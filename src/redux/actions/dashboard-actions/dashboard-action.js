@@ -42,3 +42,21 @@ export const getFilterOrAllDoc = createAsyncThunk(
     }
   }
 );
+
+export const getBookedPatientAction = createAsyncThunk(
+  Types.GET_BOOKED_PATIENT,
+  async ({ onSuccess, onFailure }, { rejectWithValue }) => {
+    try {
+      const res = await get(ENDPOINTS.GET_BOOKED_PATIENT);
+      onSuccess(res?.data);
+      return res?.data;
+    } catch (error) {
+      onFailure(error);
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);

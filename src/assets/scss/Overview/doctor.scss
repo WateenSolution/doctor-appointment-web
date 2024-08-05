@@ -1,73 +1,91 @@
-.Dashboard-container {
+.DoctorDashboard-container {
   height: 100vh;
   display: flex;
-  align-items: flex-start; /* Align items at the start */
-  justify-content: space-between; /* Ensure space is between columns */
+  align-items: flex-start;
+  justify-content: space-between;
   position: relative;
 }
 
-.Content-column {
+.DoctorContent-column {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding-right: 20px;
   flex: 1;
 }
 
-.Content-row {
+.DoctorContent-row {
   display: flex;
   align-items: flex-start;
   margin-bottom: 20px;
 }
 
-.Content-left,
-.Content-right {
+.DoctorContent-left {
   padding: 20px;
-}
-
-.Content-left {
   flex: 1;
-  text-align: left; /* Align text to the left */
+  text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.Content-right {
+.DoctorContent-right {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.Dashboard-image {
+.DoctorDashboard-image {
   max-width: 100%;
   height: auto;
 }
 
-.Dashboard-content {
-  text-align: left; /* Align text to the left */
+.DoctorDashboard-content {
+  text-align: left;
 }
 
-.Dashboard-title {
+.DoctorDashboard-title {
   font-size: 25px;
   color: #4e5faf;
+  margin-bottom: 30px;
 }
 
-.Dashboard-message {
-  font-size: 18px; /* Smaller than Dashboard-title */
-  color: #333; /* Optional: Adjust color if needed */
-  margin-top: 10px;
+.DoctorDashboard-text {
+  margin-left: 40px;
+  .DoctorDashboard-message1 {
+    font-size: 15px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  .DoctorDashboard-message {
+    font-size: 15px;
+    color: #333;
+    margin-top: 10px;
+  }
 }
 
-.icon {
+.DoctorIcon {
   font-size: 1.5rem;
   color: #4e5faf;
   margin-right: 10px;
 }
 
-.Profile-column {
+.DoctorProfile-column {
   display: flex;
   align-items: flex-start;
+  width: 200px;
+}
 
-  width: 300px; /* Fixed width for the profile column */
+.DoctorList-container {
+  height: 200px; /* Adjust height as needed */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.DoctorListCard {
+  margin-bottom: 20px; /* Space between cards */
 }

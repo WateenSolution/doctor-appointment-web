@@ -10,7 +10,7 @@ export const OverviewCard2 = ({ mT, count }) => {
   const message = "Tap to concern your doctor.";
 
   const handleClick = () => {
-    navigate("/appointment");
+    navigate("/my-appointment");
   };
 
   return (

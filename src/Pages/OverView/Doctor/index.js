@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { Fade } from "react-awesome-reveal";
 import {
@@ -7,31 +6,57 @@ import {
   ProfileDocComp,
   AppHeading,
   OverviewCommonCard,
-  OverviewCard1,
+  PatientListCard,
 } from "../../../components";
-import { DashboardDocImg, networkText } from "../../../utilities";
+import { dashboard, DashboardDocImg, networkText } from "../../../utilities";
 import Box from "@mui/material/Box";
 import { Col, Row } from "antd";
-import { getDashboardDetailAction } from "../../../redux/actions";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  getDashboardDetailAction,
+  getBookedPatientAction,
+  availableTimeStatusAction,
+} from "../../../redux/actions";
 import { toast } from "react-toastify";
 
-// Sample profile data
-const profileData = {
-  profilePicture: "https://via.placeholder.com/60", // Replace with actual profile picture URL
-  title: "Doctor Profile",
-  name: "Dr. John Doe",
-  speciality: "Cardiologist",
-};
-
-const DashboardDoctor = () => {
-  const { dashboard } = useSelector((state) => state?.dashboard);
+const DoctorDashboard = () => {
+  const { dashboard, bookedPatient } = useSelector((state) => state.dashboard);
+  const { statusAvailable } = useSelector((state) => state?.appointment);
+  console.log("statusAvailable", statusAvailable);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    getDoctorDetail();
+    getPatientDetail();
+    getBookedPatientList();
   }, []);
 
-  const getDoctorDetail = async (values) => {
+  const addAvailableTime = async (doctor, appointmentTime, status, user_id) => {
+    if (navigator.onLine) {
+      const requestBody = {
+        name: doctor,
+        time: appointmentTime,
+        status: status,
+        user_id: user_id,
+      };
+
+      const body = {
+        values: requestBody,
+        onSuccess: async (res) => {
+          toast.success("Status Successfully update");
+          navigate("/");
+        },
+        onFailure: (error) => {
+          toast.error(networkText);
+        },
+      };
+
+      dispatch(availableTimeStatusAction(body));
+    } else {
+      toast.error(networkText);
+    }
+  };
+  const getPatientDetail = async () => {
     if (navigator.onLine) {
       const body = {
         onSuccess: async (res) => {},
@@ -43,80 +68,86 @@ const DashboardDoctor = () => {
       toast.error(networkText);
     }
   };
-  console.log("dashboard data", dashboard);
+  const getBookedPatientList = async () => {
+    if (navigator.onLine) {
+      const body = {
+        onSuccess: async (res) => {},
+        onFailure: (res) => {},
+      };
+
+      dispatch(getBookedPatientAction(body));
+    } else {
+      toast.error(networkText);
+    }
+  };
+
   return (
-    <AppContainer style={{ position: "relative", backgroundColor: "blue" }}>
+    <AppContainer style={{ position: "relative" }}>
       <Box sx={{ width: "100%" }}>
-        <Row className="Dashboard-container">
+        <Row className="DoctorDashboard-container">
           <Col
             xs={24}
             sm={24}
             md={18}
             lg={18}
             xl={18}
-            className="Content-column"
-            style={{ backgroundColor: "yellow" }}
+            className="DoctorContent-column"
           >
             <AppHeading
-              title={"Dashboard"}
+              title="Dashboard"
               titleFontWeight={800}
               dateCheck={true}
             />
-            <Row className="Content-row" style={{ backgroundColor: "gray" }}>
-              <Col
-                span={16}
-                className="Content-left"
-                style={{ backgroundColor: "green" }}
-              >
-                <div className="Dashboard-content">
-                  <h2 className="Dashboard-title">
+            <Row className="DoctorContent-row">
+              <Col span={14} className="DoctorContent-left">
+                <div className="DoctorDashboard-content">
+                  <h2 className="DoctorDashboard-title">
                     Welcome {dashboard?.getAllDoctorsDetails?.username}!
                   </h2>
-                  <p className="Dashboard-message">
-                    You have <strong>0</strong> patients remaining today!
-                  </p>
+                  <div className="DoctorDashboard-text">
+                    <p className="DoctorDashboard-message1">
+                      You have <strong>0</strong> patients remaining today!
+                    </p>
+                    <p className="DoctorDashboard-message">
+                      Remember to check documentation before call.
+                    </p>
+                  </div>
                 </div>
               </Col>
-              <Col
-                span={8}
-                className="Content-right"
-                style={{ backgroundColor: "red" }}
-              >
+              <Col span={10} className="DoctorContent-right">
                 <Fade direction="right" triggerOnce>
                   <img
                     src={DashboardDocImg}
                     alt="Dashboard"
-                    className="Dashboard-image"
+                    className="DoctorDashboard-image"
                   />
                 </Fade>
               </Col>
             </Row>
+
             <Row>
-              <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                {/*   <OverviewCommonCard
-                  title={"Today's Appoinments"}
-                  bgColor={"#F0F0F0"}
-                  titleFontSize={20}
-                  titleFontWeight={800}
-                  titleFontFamily={"Lato"}
-                  titleLineHeight={"36px"}
-                  titleLetterSpacing={0.25}
-                >
-                  <OverviewCard1
-                    //iconSrc={installBaseIcon}
-                    title={"Installed Base"}
-                    value={"30"}
-                    valUnit={"Kw"}
-                    valFontSize={30}
-                    icoWidth={80}
-                    icoHeight={90}
-                    valFontWeight={400}
-                    mT={24}
-                    con_mT={30}
-                    con_mB={20}
-                  />
-                </OverviewCommonCard>*/}
-              </Col>
+              <OverviewCommonCard bgColor="#F0F0F0">
+                <div className="DoctorList-container">
+                  {bookedPatient?.total_users?.map((patient, index) => (
+                    <PatientListCard
+                      lastName={patient.last_name}
+                      firstName={patient.first_name}
+                      image={patient.image}
+                      note={patient.notes}
+                      status={patient.status}
+                      icoHeight={60}
+                      icoWidth={60}
+                      mT={20}
+                      id={patient.id}
+                      con_mT={10}
+                      addAvailableTime={addAvailableTime}
+                      doctor={patient.doctor}
+                      appointmentTime={patient.appointment_time}
+                      user_id={patient.user_id}
+                    />
+                  ))}
+                </div>
+              </OverviewCommonCard>
             </Row>
           </Col>
           <Col
@@ -125,14 +156,15 @@ const DashboardDoctor = () => {
             md={6}
             lg={6}
             xl={6}
-            className="Profile-column"
-            style={{ backgroundColor: "blue" }}
+            className="DoctorProfile-column"
           >
             <ProfileDocComp
               profilePicture={dashboard?.getAllDoctorsDetails?.image}
-              title={profileData.title}
-              name={profileData.name}
-              speciality={profileData.speciality}
+              name={dashboard?.getAllDoctorsDetails?.username}
+              phoneNumber={dashboard?.getAllDoctorsDetails?.phone_number}
+              email={dashboard?.getAllDoctorsDetails?.email}
+              rating={dashboard?.total_users[0]?.average_rating || 0}
+              review={dashboard?.total_users[0]?.total_reviews || 0}
             />
           </Col>
         </Row>
@@ -141,4 +173,4 @@ const DashboardDoctor = () => {
   );
 };
 
-export default DashboardDoctor;
+export default DoctorDashboard;

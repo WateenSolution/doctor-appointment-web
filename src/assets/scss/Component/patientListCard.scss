@@ -1,0 +1,29 @@
+.patientListCard {
+  .iconContainer img:hover {
+    transform: scale(1.05);
+  }
+
+  .additionalIcons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .description {
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  .status {
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  @media (max-width: 768px) {
+    padding: 15px;
+
+    .additionalIcons {
+      justify-content: flex-start;
+    }
+  }
+}
