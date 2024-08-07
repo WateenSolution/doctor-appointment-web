@@ -1,0 +1,122 @@
+.chat-container {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  overflow: hidden; /* Ensure nothing overflows out of the container */
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.doctor-image {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.doctor-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: calc(
+    100% - 100px
+  ); /* Adjust the height based on other elements */
+  word-wrap: break-word; /* Ensure long messages break into multiple lines */
+}
+
+.chat-message {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+  padding: 5px 10px;
+  border-radius: 5px;
+  max-width: 100%; /* Ensure messages don't overflow the container */
+}
+
+.my-message {
+  align-self: flex-end;
+  background-color: #4e5faf;
+  color: #fff;
+}
+
+.other-message {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+}
+
+.chat-input-container {
+  display: flex;
+  align-items: center;
+  position: relative; /* For positioning the emoji picker */
+}
+
+.emoji-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.emoji-picker-container {
+  position: absolute;
+  bottom: 60px; /* Adjust based on the position relative to input */
+  right: 20px;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.chat-input {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #e0e0e0;
+  font-size: 14px;
+  margin-right: 10px;
+  outline: none;
+}
+
+.chat-send-btn {
+  padding: 10px 20px;
+  background-color: #4e5faf;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.chat-send-btn:hover {
+  background-color: #2a3b8f;
+}

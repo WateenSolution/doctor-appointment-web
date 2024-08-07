@@ -169,3 +169,41 @@ export const MyAppointmentIcon = ({
     </svg>
   );
 };
+export const LiveChatIcon = ({
+  fill = "#4e5faf",
+  height = "24",
+  width = "24",
+}) => {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient id="chatGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style={{ stopColor: "#4e5faf", stopOpacity: 1 }} />
+          <stop
+            offset="100%"
+            style={{ stopColor: "#1d3c6e", stopOpacity: 1 }}
+          />
+        </linearGradient>
+        <filter id="chatShadow" x="0" y="0" width="150%" height="150%">
+          <feDropShadow
+            dx="2"
+            dy="2"
+            stdDeviation="3"
+            floodColor="rgba(0, 0, 0, 0.2)"
+          />
+        </filter>
+      </defs>
+      <path
+        d="M20 2H4C2.9 2 2 2.9 2 4V18C2 19.1 2.9 20 4 20H18L22 24V4C22 2.9 21.1 2 20 2ZM7 9H17V11H7V9ZM7 13H13V15H7V13Z"
+        fill="url(#chatGradient)"
+        filter="url(#chatShadow)"
+      />
+    </svg>
+  );
+};

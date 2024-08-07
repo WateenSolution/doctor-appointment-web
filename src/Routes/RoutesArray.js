@@ -9,6 +9,9 @@ import {
   DashboardPatient,
   PatientAppointment,
   PatientMyAppoint,
+  DoctorMyAppoint,
+  Chat,
+  Payment,
 } from "../Pages";
 
 export const My_Routes = {
@@ -48,6 +51,14 @@ export const My_Routes = {
       path: "/",
       component: <DashboardDoctor />,
     },
+    {
+      path: "/my-appointment",
+      component: <DoctorMyAppoint />,
+    },
+    {
+      path: "/live-chat",
+      component: <Chat />,
+    },
   ],
 
   Patient_Private_Routes: [
@@ -76,8 +87,16 @@ export const My_Routes = {
       component: <PatientAppointment />,
     },
     {
+      path: "/live-chat",
+      component: <Chat />,
+    },
+    {
       path: "/my-appointment",
       component: <PatientMyAppoint />,
+    },
+    {
+      path: "/payment-billing",
+      component: <Payment />,
     },
   ],
 

@@ -22,7 +22,7 @@ import { toast } from "react-toastify";
 const DoctorDashboard = () => {
   const { dashboard, bookedPatient } = useSelector((state) => state.dashboard);
   const { statusAvailable } = useSelector((state) => state?.appointment);
-  console.log("statusAvailable", statusAvailable);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -124,28 +124,42 @@ const DoctorDashboard = () => {
                 </Fade>
               </Col>
             </Row>
-
             <Row>
               <OverviewCommonCard bgColor="#F0F0F0">
                 <div className="DoctorList-container">
-                  {bookedPatient?.total_users?.map((patient, index) => (
-                    <PatientListCard
-                      lastName={patient.last_name}
-                      firstName={patient.first_name}
-                      image={patient.image}
-                      note={patient.notes}
-                      status={patient.status}
-                      icoHeight={60}
-                      icoWidth={60}
-                      mT={20}
-                      id={patient.id}
-                      con_mT={10}
-                      addAvailableTime={addAvailableTime}
-                      doctor={patient.doctor}
-                      appointmentTime={patient.appointment_time}
-                      user_id={patient.user_id}
-                    />
-                  ))}
+                  {bookedPatient?.total_users?.length > 0 ? (
+                    bookedPatient.total_users.map((patient, index) => (
+                      <PatientListCard
+                        key={patient.id} // Add a unique key for each card
+                        lastName={patient.last_name}
+                        firstName={patient.first_name}
+                        image={patient.image}
+                        note={patient.notes}
+                        status={patient.status}
+                        icoHeight={60}
+                        icoWidth={60}
+                        mT={20}
+                        id={patient.id}
+                        con_mT={10}
+                        addAvailableTime={addAvailableTime}
+                        doctor={patient.doctor}
+                        appointmentTime={patient.appointment_time}
+                        user_id={patient.user_id}
+                      />
+                    ))
+                  ) : (
+                    <p
+                      style={{
+                        textAlign: "center",
+                        color: "#888",
+                        fontSize: "18px",
+                        marginTop: "40px",
+                        fontStyle: "italic",
+                      }}
+                    >
+                      No card available
+                    </p> // Show this message when no cards are available
+                  )}
                 </div>
               </OverviewCommonCard>
             </Row>

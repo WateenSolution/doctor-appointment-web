@@ -276,7 +276,6 @@ const ForgotPassword = () => {
                             <option value="">Select Option</option>
                             <option value="remote">Remote</option>
                             <option value="inperson">In-person</option>
-                            <option value="both">Both</option>
                           </Field>
                           <ErrorMessage
                             name="remoteInperson"

@@ -120,9 +120,9 @@ const DashboardPatient = () => {
                   >
                     <Option value="Cardiology">Cardiology</Option>
                     <Option value="Dermatology">Dermatology</Option>
-                    <Option value="Neurology">Neurology</Option>
+                    <Option value="Neurology">Orthopedics</Option>
                     <Option value="Pediatrics">Pediatrics</Option>
-                    <Option value="General">General</Option>
+
                     {/* Add more options as needed */}
                   </Select>
                 </Col>
@@ -142,6 +142,7 @@ const DashboardPatient = () => {
                       rating={doctor.average_rating}
                       description={doctor.about}
                       totalReviews={doctor.total_reviews}
+                      perUsername={dashboard?.getAllDoctorsDetails?.username}
                     />
                   ))}
                 </div>

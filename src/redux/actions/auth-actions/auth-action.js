@@ -52,7 +52,6 @@ export const forgotPassAction = createAsyncThunk(
   Types.FORGOT_PASS,
   async ({ values, onSuccess, onFailure }, { rejectWithValue }) => {
     try {
-      console.log("value", values);
       const requestBody = {
         email: values.email,
         username: values.username,

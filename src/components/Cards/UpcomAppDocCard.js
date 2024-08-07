@@ -5,34 +5,29 @@ import {
   UserOutlined,
   MessageTwoTone,
   PhoneOutlined,
-  ScheduleOutlined,
+  StarOutlined,
 } from "@ant-design/icons";
 import { Tooltip, Modal, Rate } from "antd";
 import { motion } from "framer-motion";
 import moment from "moment";
 import { Col, Row } from "antd";
 
-export const UpcomAppPatCard = ({
+export const UpcomAppDocCard = ({
   appointmentTime,
-  doctorName,
+  status,
   pendingMessage,
   calendar,
   profile,
   available,
   fee,
-  addDocRating,
   firstName,
   lastName,
-  status,
-  docRating,
-  ratingState,
-  user_id,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [rating, setRating] = useState(docRating); // Initialize rating with docRating
 
   const formattedMonth = moment(calendar).format("MMM");
   const formattedDateDay = moment(calendar).format("Do");
+
   const formattedTime = moment(appointmentTime, "HH:mm:ss").format("hh:mm:ss");
 
   const IconComponent = available === "remote" ? PhoneOutlined : UserOutlined;
@@ -45,23 +40,10 @@ export const UpcomAppPatCard = ({
     setIsModalVisible(false);
   };
 
-  const handleRatingChange = (value) => {
-    setRating(value);
-    addDocRating(
-      user_id,
-      firstName,
-      lastName,
-      doctorName,
-      appointmentTime,
-      value,
-      ratingState
-    );
-  };
-
   const modalContent = (
     <div style={{ textAlign: "center" }}>
       <h2 style={{ fontSize: "24px", fontWeight: "600", marginBottom: "15px" }}>
-        {`${firstName} ${lastName}`} Details
+        Doctor Details
       </h2>
       <img
         src={profile}
@@ -76,7 +58,8 @@ export const UpcomAppPatCard = ({
         }}
       />
       <h3 style={{ fontSize: "20px", fontWeight: "500", marginBottom: "10px" }}>
-        Dr. {doctorName}
+        {firstName + " "}
+        {lastName}
       </h3>
       <p style={{ fontSize: "16px", color: "#666" }}>
         Appointment Time: {formattedMonth} {formattedDateDay} at {formattedTime}
@@ -88,30 +71,6 @@ export const UpcomAppPatCard = ({
         Message: {pendingMessage}
       </p>
       <p style={{ fontSize: "16px", color: "#666" }}>Fee: Rs. {fee}</p>
-      {status !== "pending" && (
-        <div style={{ marginTop: "20px" }}>
-          <h4 style={{ fontSize: "18px", fontWeight: "500" }}>
-            Rate the Doctor:
-          </h4>
-          <Rate
-            allowHalf
-            value={rating}
-            onChange={handleRatingChange}
-            disabled={ratingState === "completed"}
-            style={{
-              fontSize: "24px",
-              color: "#4e5faf",
-              filter: ratingState === "completed" ? "blur(1px)" : "none",
-              opacity: ratingState === "completed" ? 0.7 : 1,
-            }}
-          />
-          <div style={{ marginTop: "10px" }}>
-            <p style={{ fontSize: "14px", color: "#666" }}>
-              Your Rating: {rating} stars
-            </p>
-          </div>
-        </div>
-      )}
     </div>
   );
 
@@ -156,6 +115,7 @@ export const UpcomAppPatCard = ({
         >
           {status}
         </div>
+
         {/* Calendar Icon at the Top Right Corner */}
         <div
           style={{
@@ -215,12 +175,13 @@ export const UpcomAppPatCard = ({
               />
               <h3
                 style={{
-                  fontSize: "16px",
+                  fontSize: "10px",
                   fontWeight: "600",
                   marginTop: "5px",
                 }}
               >
-                Dr. {doctorName}
+                {firstName + " "}
+                {lastName}
               </h3>
             </div>
           </Col>
@@ -266,10 +227,11 @@ export const UpcomAppPatCard = ({
                   marginBottom: "5px",
                 }}
               >
-                <ScheduleOutlined
-                  style={{ marginRight: "5px", color: "#4e5faf" }} // Customize icon style
+                <MessageTwoTone
+                  twoToneColor="#4e5faf"
+                  style={{ marginRight: "5px" }}
                 />
-                {`${firstName} ${lastName}`}
+                {pendingMessage}
               </p>
               <p
                 style={{

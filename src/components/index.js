@@ -11,7 +11,7 @@ export * from "./Profile/SideProfilePat";
 
 // Header
 export * from "./Header/AuthHeader";
-export * from "./Chat/ChatBox";
+
 //Charts
 export * from "./Charts/PieCharts";
 export * from "./Charts/LineCharts";
@@ -26,6 +26,7 @@ export * from "./Charts/CompBarCharts";
 
 //Cards
 export * from "./Cards/UpcomAppPatCard";
+export * from "./Cards/UpcomAppDocCard";
 export * from "./Cards/DoctorListCard";
 export * from "./Cards/PatientListCard";
 export * from "./Cards/OverviewCommonCard";

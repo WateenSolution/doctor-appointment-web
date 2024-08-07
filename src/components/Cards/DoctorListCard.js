@@ -26,6 +26,7 @@ export const DoctorListCard = ({
   rating,
   description,
   totalReviews,
+  perUsername,
 }) => {
   const navigate = useNavigate();
 
@@ -55,7 +56,16 @@ export const DoctorListCard = ({
       },
     });
   };
-
+  const handleChatClick = () => {
+    navigate("/live-chat", {
+      state: {
+        user_id: id,
+        username: title,
+        doctor_name: perUsername, // Assuming doctor object has name
+        doctor_image: iconSrc, // Assuming doctor object has image URL
+      },
+    });
+  };
   return (
     <motion.div
       className="doctorListCard"
@@ -174,8 +184,11 @@ export const DoctorListCard = ({
               onClick={handleCalendarClick} // Add click handler for calendar icon
             />
           </Tooltip>
-          <Tooltip title="Favorites">
-            <MessageOutlined style={{ fontSize: "20px", color: "#fff" }} />
+          <Tooltip title="Chat">
+            <MessageOutlined
+              style={{ fontSize: "20px", color: "#fff" }}
+              onClick={handleChatClick}
+            />
           </Tooltip>
         </div>
       </div>

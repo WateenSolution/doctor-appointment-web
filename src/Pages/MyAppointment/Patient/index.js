@@ -4,20 +4,58 @@ import { Fade } from "react-awesome-reveal";
 import { AppContainer, AppHeading, UpcomAppPatCard } from "../../../components";
 import Box from "@mui/material/Box";
 import { useParams } from "react-router-dom";
-import { getPatientAppointListAction } from "../../../redux/actions";
+import {
+  getPatientAppointListAction,
+  addRatingAction,
+} from "../../../redux/actions";
 import { networkText } from "../../../utilities";
 import { toast } from "react-toastify";
 import { Row, Col } from "antd"; // Import Row and Col from Ant Design
 
 const PatMyAppoinment = () => {
   const dispatch = useDispatch();
-  const { patientAppList } = useSelector((state) => state?.appointment);
-  console.log("patient app", patientAppList);
+  const { patientAppList, doctRating } = useSelector(
+    (state) => state?.appointment
+  );
 
   useEffect(() => {
     getPatientAppData();
   }, []);
+  const addDocRating = async (
+    user_id,
+    firstName,
+    lastName,
+    doctorName,
+    appointmentTime,
+    value,
+    ratingState
+  ) => {
+    if (navigator.onLine) {
+      const requestBody = {
+        user_id: user_id,
+        first_name: firstName,
+        last_name: lastName,
+        doctor: doctorName,
+        appointment_time: appointmentTime,
+        doc_rating: value,
+        rating_status: ratingState,
+      };
 
+      const body = {
+        values: requestBody,
+        onSuccess: async (res) => {
+          toast.success("Rate added Successfully ");
+        },
+        onFailure: (error) => {
+          toast.error(networkText);
+        },
+      };
+
+      dispatch(addRatingAction(body));
+    } else {
+      toast.error(networkText);
+    }
+  };
   const getPatientAppData = async () => {
     if (navigator.onLine) {
       const body = {
@@ -47,6 +85,9 @@ const PatMyAppoinment = () => {
               {patientAppList.data.map((appointment) => (
                 <Col xs={24} sm={12} lg={12} key={appointment.id}>
                   <UpcomAppPatCard
+                    user_id={appointment.user_id}
+                    firstName={appointment.first_name}
+                    lastName={appointment.last_name}
                     appointmentTime={appointment.appointment_time}
                     doctorName={appointment.doctor}
                     pendingMessage={appointment.notes}
@@ -54,9 +95,10 @@ const PatMyAppoinment = () => {
                     profile={appointment.image}
                     fee={appointment.doctor_fee}
                     available={appointment.remote_inperson}
-                    onClick={() =>
-                      console.log(`Navigating to appointment ${appointment.id}`)
-                    }
+                    addDocRating={addDocRating}
+                    status={appointment.status}
+                    docRating={appointment.doc_rating}
+                    ratingState={appointment.rating_status}
                   />
                 </Col>
               ))}

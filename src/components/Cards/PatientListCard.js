@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CustomTextBox } from "../CustomComponents/CustomTextBox";
-import { profile } from "../../utilities";
 import { Chat } from "../../components";
-import { useDispatch } from "react-redux";
 import {
-  CalendarOutlined,
   EyeOutlined,
   CheckCircleOutlined,
   CloseCircleOutlined,
@@ -33,15 +30,6 @@ export const PatientListCard = ({
 }) => {
   const navigate = useNavigate();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isChatVisible, setIsChatVisible] = useState(false);
-
-  const handleCalendarClick = () => {
-    navigate(`/appointment-form/${id}`, {
-      state: {
-        data: { id },
-      },
-    });
-  };
 
   const handleEyeClick = () => {
     setIsModalVisible(true);
@@ -57,11 +45,14 @@ export const PatientListCard = ({
   };
 
   const handleChatClick = () => {
-    setIsChatVisible(true);
-  };
-
-  const handleCloseChat = () => {
-    setIsChatVisible(false);
+    navigate("/live-chat", {
+      state: {
+        user_id,
+        username: firstName + " " + lastName,
+        doctor_name: doctor, // Assuming doctor object has name
+        doctor_image: image, // Assuming doctor object has image URL
+      },
+    });
   };
 
   const renderStatusIcon = (status) => {
@@ -102,7 +93,7 @@ export const PatientListCard = ({
             <img
               height={icoHeight || 60}
               width={icoWidth || 60}
-              src={image || profile}
+              src={image}
               alt={`${firstName} ${lastName}`}
               style={{
                 borderRadius: "50%",
@@ -150,12 +141,7 @@ export const PatientListCard = ({
                 onClick={handleChatClick}
               />
             </Tooltip>
-            <Tooltip title="Appointment">
-              <CalendarOutlined
-                style={{ fontSize: "20px", color: "#fff", cursor: "pointer" }}
-                onClick={handleCalendarClick}
-              />
-            </Tooltip>
+
             <Tooltip title="View Details">
               <EyeOutlined
                 style={{ fontSize: "20px", color: "#fff", cursor: "pointer" }}
@@ -198,18 +184,6 @@ export const PatientListCard = ({
             </Button>
           </div>
         )}
-      </Modal>
-
-      {/* Chat Modal */}
-      <Modal
-        title="Live Chat"
-        visible={isChatVisible}
-        onCancel={handleCloseChat}
-        footer={null}
-        width={800}
-        style={{ top: 20 }}
-      >
-        <Chat />
       </Modal>
     </motion.div>
   );

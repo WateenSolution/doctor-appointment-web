@@ -111,7 +111,6 @@ const AppointmentForm = ({ id }) => {
     if (value) {
       const selectedDoctor = usersInfo.find((doctor) => doctor.id === value);
       if (selectedDoctor) {
-        console.log("fields", selectedDoctor);
         getAvailableTime(selectedDoctor?.username);
         setFieldValue("doctorFee", selectedDoctor.doctor_fee || "");
         setFieldValue("doctorEmail", selectedDoctor.email || "");

@@ -30,6 +30,7 @@ import {
   LogoutIcon,
   BookAppointmentIcon,
   MyAppointmentIcon,
+  LiveChatIcon,
 } from "../../components";
 
 const drawerWidth = 250;
@@ -106,6 +107,8 @@ const renderMenu = (viewOption, color) => {
 
     case "myAppointment":
       return <MyAppointmentIcon height={20} width={20} fill={color} />;
+    case "liveChat":
+      return <LiveChatIcon height={20} width={20} fill={color} />;
     default:
       return null;
   }

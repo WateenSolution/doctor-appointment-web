@@ -5,6 +5,8 @@ import {
   getAppointTimeAction,
   submitAppointmentFormAction,
   getPatientAppointListAction,
+  getDoctorAppointListAction,
+  addRatingAction,
 } from "../../actions";
 
 const initialState = {
@@ -104,6 +106,41 @@ const AppointmentSlice = createSlice({
         state.error = payload;
       }
     );
+
+    builder.addCase(
+      getDoctorAppointListAction.pending,
+      (state, { payload }) => {
+        state.operationLoad = true;
+        state.error = null;
+      }
+    );
+    builder.addCase(
+      getDoctorAppointListAction.fulfilled,
+      (state, { payload }) => {
+        state.operationLoad = false;
+        state.DoctorAppList = payload;
+      }
+    );
+
+    builder.addCase(
+      getDoctorAppointListAction.rejected,
+      (state, { payload }) => {
+        state.operationLoad = false;
+        state.error = payload;
+      }
+    );
+
+    builder.addCase(addRatingAction.pending, (state, { payload }) => {
+      state.error = null;
+    });
+    builder.addCase(addRatingAction.fulfilled, (state, { payload }) => {
+      state.error = null;
+      state.doctRating = payload?.data;
+    });
+
+    builder.addCase(addRatingAction.rejected, (state, { payload }) => {
+      state.error = payload;
+    });
   },
 });
 export default AppointmentSlice.reducer;

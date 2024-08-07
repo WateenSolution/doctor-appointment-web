@@ -19,4 +19,6 @@ export const ENDPOINTS = {
   GET_APPOINT_BOOK_TIME: "/appointment/get-appoint-time",
   ADD_APPOINT_FORM: "/appointment/add-patient-form",
   GET_PAT_APPOINT_LIST: "/appointment/get-pat-app-list",
+  ADD_RATING: "/appointment/add-rating",
+  GET_DOC_APPOINT_LIST: "/appointment/get-doc-app-list",
 };

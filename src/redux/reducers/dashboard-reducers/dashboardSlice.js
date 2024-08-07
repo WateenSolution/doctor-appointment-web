@@ -52,7 +52,6 @@ const DashboardSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getBookedPatientAction.fulfilled, (state, { payload }) => {
-      console.log("Patient booked data is", payload);
       state.filterDataLoader = false;
       state.bookedPatient = payload?.data;
     });
