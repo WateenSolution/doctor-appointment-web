@@ -63,9 +63,9 @@ const DocMyAppoinment = () => {
             <p>No upcoming appointments.</p>
           )}
           <p
-            style={{ marginTop: "20px", textAlign: "center", fontWeight: 600 }}
+            style={{ marginTop: "30px", textAlign: "center", fontWeight: 700 }}
           >
-            Go to the Dashboard to approve the requests.
+            Go to the Dashboard to approve the requests if any.
           </p>
         </Fade>
       </Box>

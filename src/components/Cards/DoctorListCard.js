@@ -142,7 +142,7 @@ export const DoctorListCard = ({
           <div className="ratingContainer">
             {renderRatingStars()}
             <CustomTextBox
-              text={rating ?? "N/A"}
+              text={rating ?? "0"}
               textFontColor="white"
               textFontSize={14}
               textFontWeight={400}
@@ -154,7 +154,7 @@ export const DoctorListCard = ({
               <div className="reviewsContainer">
                 <UserOutlined style={{ fontSize: "14px", color: "#fff" }} />
                 <CustomTextBox
-                  text={totalReviews}
+                  text={totalReviews || "0"}
                   textFontColor="white"
                   textFontSize={12}
                   textFontWeight={400}
