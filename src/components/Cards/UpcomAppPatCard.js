@@ -3,11 +3,10 @@ import {
   CalendarTwoTone,
   ClockCircleTwoTone,
   UserOutlined,
-  MessageTwoTone,
   PhoneOutlined,
   ScheduleOutlined,
 } from "@ant-design/icons";
-import { Tooltip, Modal, Rate } from "antd";
+import { Tooltip, Modal, Rate, Button } from "antd";
 import { motion } from "framer-motion";
 import moment from "moment";
 import { Col, Row } from "antd";
@@ -33,7 +32,7 @@ export const UpcomAppPatCard = ({
 
   const formattedMonth = moment(calendar).format("MMM");
   const formattedDateDay = moment(calendar).format("Do");
-  const formattedTime = moment(appointmentTime, "HH:mm:ss").format("hh:mm:ss");
+  const formattedTime = moment(appointmentTime, "HH:mm:ss").format("hh:mm A");
 
   const IconComponent = available === "remote" ? PhoneOutlined : UserOutlined;
 
@@ -59,38 +58,83 @@ export const UpcomAppPatCard = ({
   };
 
   const modalContent = (
-    <div style={{ textAlign: "center" }}>
-      <h2 style={{ fontSize: "24px", fontWeight: "600", marginBottom: "15px" }}>
-        {`${firstName} ${lastName}`} Details
-      </h2>
-      <img
-        src={profile}
-        alt="Profile"
-        style={{
-          width: "100px",
-          height: "100px",
-          borderRadius: "50%",
-          border: "2px solid #4e5faf",
-          objectFit: "cover",
-          marginBottom: "10px",
-        }}
-      />
-      <h3 style={{ fontSize: "20px", fontWeight: "500", marginBottom: "10px" }}>
-        Dr. {doctorName}
-      </h3>
-      <p style={{ fontSize: "16px", color: "#666" }}>
-        Appointment Time: {formattedMonth} {formattedDateDay} at {formattedTime}
-      </p>
-      <p style={{ fontSize: "16px", color: "#666" }}>
-        Availability: {available} meeting
-      </p>
-      <p style={{ fontSize: "16px", color: "#666" }}>
-        Message: {pendingMessage}
-      </p>
-      <p style={{ fontSize: "16px", color: "#666" }}>Fee: Rs. {fee}</p>
+    <div
+      style={{
+        textAlign: "center",
+        padding: "20px",
+        borderRadius: "12px",
+        background: "transparent", // Removed background color
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center", // Center align the content
+        boxShadow: "none", // Remove box shadow
+      }}
+    >
+      <Row gutter={16}>
+        {/* Left Column with Profile Picture and Doctor Name */}
+        <Col span={12}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src={profile}
+              alt="Profile"
+              style={{
+                width: "100px",
+                height: "100px",
+                borderRadius: "50%",
+                border: "3px solid #4e5faf",
+                objectFit: "cover",
+                marginBottom: "10px",
+              }}
+            />
+            <h3
+              style={{
+                fontSize: "20px",
+                fontWeight: "500",
+                marginBottom: "10px",
+                color: "#333",
+              }}
+            >
+              Dr. {doctorName}
+            </h3>
+          </div>
+        </Col>
+
+        {/* Right Column with Contact Details */}
+        <Col span={12}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              textAlign: "left",
+            }}
+          >
+            <p style={{ fontSize: "12px", color: "#666", marginBottom: "5px" }}>
+              Appointment Time: {formattedMonth} {formattedDateDay} at{" "}
+              {formattedTime}
+            </p>
+            <p style={{ fontSize: "12px", color: "#666", marginBottom: "5px" }}>
+              Availability: {available} meeting
+            </p>
+            <p style={{ fontSize: "12px", color: "#666", marginBottom: "5px" }}>
+              Message: {pendingMessage}
+            </p>
+            <p style={{ fontSize: "12px", color: "#666", marginBottom: "5px" }}>
+              Fee: Rs. {fee}
+            </p>
+          </div>
+        </Col>
+      </Row>
+
       {status !== "pending" && (
-        <div style={{ marginTop: "20px" }}>
-          <h4 style={{ fontSize: "18px", fontWeight: "500" }}>
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <h4 style={{ fontSize: "18px", fontWeight: "500", color: "#4e5faf" }}>
             Rate the Doctor:
           </h4>
           <Rate
@@ -100,7 +144,7 @@ export const UpcomAppPatCard = ({
             disabled={ratingState === "completed"}
             style={{
               fontSize: "24px",
-              color: "#4e5faf",
+              color: "#fadb14",
               filter: ratingState === "completed" ? "blur(1px)" : "none",
               opacity: ratingState === "completed" ? 0.7 : 1,
             }}
@@ -285,12 +329,13 @@ export const UpcomAppPatCard = ({
         </Row>
       </motion.div>
 
-      {/* Modal */}
+      {/* Modal with Detailed Information */}
       <Modal
-        title=""
-        open={isModalVisible}
+        title={`${firstName} ${lastName}'s Profile`}
+        visible={isModalVisible}
         onCancel={handleCancel}
         footer={null}
+        style={{ top: 20 }}
       >
         {modalContent}
       </Modal>

@@ -106,7 +106,7 @@ const DoctorDashboard = () => {
                   </h2>
                   <div className="DoctorDashboard-text">
                     <p className="DoctorDashboard-message1">
-                      You have <strong>0</strong> patients remaining today!
+                      You have some patients remaining today?
                     </p>
                     <p className="DoctorDashboard-message">
                       Remember to check documentation before call.
