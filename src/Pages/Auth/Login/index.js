@@ -10,6 +10,7 @@ import {
   networkText,
   loginSide,
 } from "../../../utilities";
+
 import { Fade } from "react-awesome-reveal";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Col, Row } from "antd";
@@ -117,11 +118,11 @@ const Login = () => {
                         <label>Remember Me</label>
                       </div>
                       <div className="linkText">
-                        <Link to="/ForgotPassword">Sign In</Link>
+                        <Link to="/sign-Up">Sign-Up</Link>
                       </div>
                     </div>
                     <LoaderButton
-                      title="Submit"
+                      title="Login"
                       onClick={handleSubmit}
                       isLoading={loginLoad}
                     />

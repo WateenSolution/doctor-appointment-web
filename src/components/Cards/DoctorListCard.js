@@ -67,7 +67,7 @@ export const DoctorListCard = ({
     });
   };
   return (
-    <motion.div
+    <div
       className="doctorListCard"
       style={{
         marginTop: mT,
@@ -192,6 +192,6 @@ export const DoctorListCard = ({
           </Tooltip>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };

@@ -100,7 +100,7 @@ const ForgotPassword = () => {
           <div className="form-card">
             <div className="form-content">
               <div className="headCon">
-                <h3 className="form-title">Forgot Password</h3>
+                <h3 className="form-title">Sign Up</h3>
               </div>
               <div className="role-selection">
                 <label className="label-text">Select Role</label>
@@ -355,7 +355,13 @@ const ForgotPassword = () => {
                         </div>
                       </>
                     )}
+                    <div className="back-to-login mt-4">
+                      <Link to="/Login" className="back-link">
+                        <ArrowBack />
 
+                        <span>Back to Login</span>
+                      </Link>
+                    </div>
                     <div className="form-group mt-3">
                       <LoaderButton
                         title="Submit"
@@ -366,17 +372,11 @@ const ForgotPassword = () => {
                   </Form>
                 )}
               </Formik>
-              <div className="back-to-login mt-4">
-                <Link to="/Login" className="back-link">
-                  <ArrowBack />
-                  <span>Back to Login</span>
-                </Link>
-              </div>
             </div>
           </div>
         </Col>
         <Col xs={24} sm={24} md={12} lg={12} xl={12} className="image-column">
-          <Fade>
+          <Fade direction="right" triggerOnce>
             <img
               src={loginSide}
               alt="Login Illustration"

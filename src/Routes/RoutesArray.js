@@ -17,7 +17,7 @@ import {
 export const My_Routes = {
   Public_Routes: [
     {
-      path: "/ForgotPassword",
+      path: "/sign-up",
       component: <ForgotPassword />,
     },
     {

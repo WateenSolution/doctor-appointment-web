@@ -74,7 +74,7 @@ export const PatientListCard = ({
   };
 
   return (
-    <motion.div
+    <div
       className="patientListCard"
       style={{
         marginTop: mT,
@@ -185,6 +185,6 @@ export const PatientListCard = ({
           </div>
         )}
       </Modal>
-    </motion.div>
+    </div>
   );
 };

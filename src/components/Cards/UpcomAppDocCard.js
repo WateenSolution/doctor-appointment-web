@@ -117,7 +117,7 @@ export const UpcomAppDocCard = ({
 
   return (
     <>
-      <motion.div
+      <div
         className="upcomAppDocCard"
         style={{
           padding: "20px",
@@ -285,7 +285,7 @@ export const UpcomAppDocCard = ({
             </div>
           </Col>
         </Row>
-      </motion.div>
+      </div>
 
       {/* Modal */}
       <Modal
