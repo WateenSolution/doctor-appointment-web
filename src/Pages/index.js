@@ -13,3 +13,4 @@ export { default as DoctorMyAppoint } from "./MyAppointment/Doctor";
 export { default as PatientMyAppoint } from "./MyAppointment/Patient";
 export { default as Chat } from "./Chat/ChatBox";
 export { default as Payment } from "./Payment";
+export { default as Telemedicine } from "./Telemedicine";

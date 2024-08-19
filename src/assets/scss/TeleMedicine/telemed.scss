@@ -1,0 +1,66 @@
+/*telemedicine.scss*/
+.app-container {
+  padding: 2rem;
+  background: linear-gradient(135deg, #f0f4ff, #d9e6ff);
+  min-height: 100vh;
+}
+
+.appointments-row {
+  display: flex;
+  justify-content: space-between;
+
+  .appointment-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .ant-card-head {
+      background: #4e5faf;
+      color: white;
+      border-radius: 10px 10px 0 0;
+      font-weight: bold;
+    }
+
+    .ant-card-extra {
+      button {
+        background: linear-gradient(135deg, #4e5faf, #6f7edb);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+
+        &:hover {
+          background-color: #3b4a8f;
+          transform: translateY(-3px);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 0 2px rgba(78, 95, 175, 0.5);
+        }
+      }
+    }
+
+    .ant-card-body {
+      padding: 1rem;
+
+      p {
+        margin: 0.5rem 0;
+        strong {
+          color: #4e5faf;
+        }
+      }
+    }
+  }
+}

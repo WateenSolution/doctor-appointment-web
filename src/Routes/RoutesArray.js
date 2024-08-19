@@ -12,6 +12,7 @@ import {
   DoctorMyAppoint,
   Chat,
   Payment,
+  Telemedicine,
 } from "../Pages";
 
 export const My_Routes = {
@@ -59,6 +60,10 @@ export const My_Routes = {
       path: "/live-chat",
       component: <Chat />,
     },
+    {
+      path: "/telemedicine",
+      component: <Telemedicine />,
+    },
   ],
 
   Patient_Private_Routes: [
@@ -97,6 +102,10 @@ export const My_Routes = {
     {
       path: "/payment-billing",
       component: <Payment />,
+    },
+    {
+      path: "/telemedicine",
+      component: <Telemedicine />,
     },
   ],
 

@@ -1,39 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { Fade } from "react-awesome-reveal";
 import { AppContainer, AppHeading, LoaderButton } from "../../components";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
+import { Box, Button, TextField } from "@mui/material";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { PaymentBillingVS, billingForm } from "../../utilities";
 
 const BillingAndPayment = () => {
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-    amount: "",
-    paymentMethod: "card",
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+  const handlePaymentMethodChange = (setFieldValue, method) => {
+    setFieldValue("paymentMethod", method);
+    if (method === "cash") {
+      setFieldValue("paypalEmail", "");
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (formData.paymentMethod === "cash") {
-      console.log("Processing cash payment for amount:", formData.amount);
-    } else {
-      console.log("Processing card payment with data:", formData);
+  const handleSubmit = (values, { setSubmitting }) => {
+    setSubmitting(true);
+    if (values.paymentMethod === "cash") {
+      console.log("Processing cash payment for amount:", values.amount);
+    } else if (values.paymentMethod === "paypal") {
+      console.log("Processing PayPal payment with data:", values);
     }
+    setSubmitting(false);
   };
 
   return (
@@ -45,41 +34,76 @@ const BillingAndPayment = () => {
       }}
     >
       <Box sx={{ width: "100%" }}>
-        <AppHeading title={"Billing and Payment"} titleFontWeight={800} />
-        <Fade>
-          <form onSubmit={handleSubmit} className="form-container">
-            <FormLabel component="legend" className="form-label">
-              Payment Method
-            </FormLabel>
-            <RadioGroup
-              name="paymentMethod"
-              value={formData.paymentMethod}
-              onChange={handleChange}
-              row
-              className="payment-method"
-            >
-              <FormControlLabel
-                value="card"
-                control={<Radio />}
-                label="Card Payment"
-              />
-              <FormControlLabel
-                value="cash"
-                control={<Radio />}
-                label="Cash Payment"
-              />
-            </RadioGroup>
+        <AppHeading
+          title={"Billing and Payment"}
+          titleFontWeight={800}
+          dateCheck={true}
+        />
 
-            {formData.paymentMethod === "card" && (
-              <>
-                <TextField
-                  label="Card Number"
+        <Formik
+          initialValues={billingForm}
+          validationSchema={PaymentBillingVS}
+          onSubmit={handleSubmit}
+        >
+          {({ isSubmitting, setFieldValue, values }) => (
+            <Form className="form-container">
+              <div className="payment-method-container">
+                <Button
+                  variant="outlined"
+                  className={`payment-method-button ${
+                    values.paymentMethod === "cash" ? "active" : ""
+                  }`}
+                  onClick={() =>
+                    handlePaymentMethodChange(setFieldValue, "cash")
+                  }
+                >
+                  Cash Payment
+                </Button>
+                <Button
+                  variant="outlined"
+                  className={`payment-method-button ${
+                    values.paymentMethod === "paypal" ? "active" : ""
+                  }`}
+                  onClick={() =>
+                    handlePaymentMethodChange(setFieldValue, "paypal")
+                  }
+                >
+                  PayPal Payment
+                </Button>
+              </div>
+
+              {values.paymentMethod === "paypal" && (
+                <div className="form-group">
+                  <label className="labelText">PayPal Email</label>
+                  <Field
+                    type="email"
+                    name="paypalEmail"
+                    className="form-control"
+                    as={TextField}
+                    fullWidth
+                    variant="outlined"
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        borderRadius: "6px",
+                      },
+                    }}
+                  />
+                  <ErrorMessage
+                    name="paypalEmail"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+              )}
+
+              <div className="form-group">
+                <label className="labelText">Card Number</label>
+                <Field
+                  type="text"
                   name="cardNumber"
-                  value={formData.cardNumber}
-                  onChange={handleChange}
-                  fullWidth
-                  required
                   className="form-control"
+                  as={TextField}
+                  fullWidth
                   variant="outlined"
                   sx={{
                     "& .MuiOutlinedInput-root": {
@@ -87,14 +111,22 @@ const BillingAndPayment = () => {
                     },
                   }}
                 />
-                <TextField
-                  label="Expiry Date (MM/YY)"
+                <ErrorMessage
+                  name="cardNumber"
+                  component="div"
+                  className="error"
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="labelText">Expiry Date</label>
+                <Field
+                  type="text"
                   name="expiryDate"
-                  value={formData.expiryDate}
-                  onChange={handleChange}
-                  fullWidth
-                  required
                   className="form-control"
+                  placeholder="MM/YY"
+                  as={TextField}
+                  fullWidth
                   variant="outlined"
                   sx={{
                     "& .MuiOutlinedInput-root": {
@@ -102,14 +134,21 @@ const BillingAndPayment = () => {
                     },
                   }}
                 />
-                <TextField
-                  label="CVV"
+                <ErrorMessage
+                  name="expiryDate"
+                  component="div"
+                  className="error"
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="labelText">CVV</label>
+                <Field
+                  type="text"
                   name="cvv"
-                  value={formData.cvv}
-                  onChange={handleChange}
-                  fullWidth
-                  required
                   className="form-control"
+                  as={TextField}
+                  fullWidth
                   variant="outlined"
                   sx={{
                     "& .MuiOutlinedInput-root": {
@@ -117,30 +156,101 @@ const BillingAndPayment = () => {
                     },
                   }}
                 />
-              </>
-            )}
-            <TextField
-              label="Amount"
-              name="amount"
-              value={formData.amount}
-              onChange={handleChange}
-              fullWidth
-              required
-              className="form-control"
-              variant="outlined"
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "6px",
-                },
-              }}
-            />
-            <LoaderButton
-              title="Submit"
-              onClick={handleSubmit}
-              //isLoading={loginLoad}
-            />
-          </form>
-        </Fade>
+                <ErrorMessage name="cvv" component="div" className="error" />
+              </div>
+
+              <div className="form-group">
+                <label className="labelText">Card Holder Name</label>
+                <Field
+                  type="text"
+                  name="cardHolderName"
+                  className="form-control"
+                  as={TextField}
+                  fullWidth
+                  variant="outlined"
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "6px",
+                    },
+                  }}
+                />
+                <ErrorMessage
+                  name="cardHolderName"
+                  component="div"
+                  className="error"
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="labelText">Billing Address</label>
+                <Field
+                  type="text"
+                  name="billingAddress"
+                  className="form-control"
+                  as={TextField}
+                  fullWidth
+                  variant="outlined"
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "6px",
+                    },
+                  }}
+                />
+                <ErrorMessage
+                  name="billingAddress"
+                  component="div"
+                  className="error"
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="labelText">Phone Number</label>
+                <Field
+                  type="text"
+                  name="phoneNumber"
+                  className="form-control"
+                  as={TextField}
+                  fullWidth
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "6px",
+                    },
+                  }}
+                />
+                <ErrorMessage
+                  name="phoneNumber"
+                  component="div"
+                  className="error"
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="labelText">Amount</label>
+                <Field
+                  type="text"
+                  name="amount"
+                  className="form-control"
+                  as={TextField}
+                  fullWidth
+                  variant="outlined"
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "6px",
+                    },
+                  }}
+                />
+                <ErrorMessage name="amount" component="div" className="error" />
+              </div>
+
+              <LoaderButton
+                title="Submit"
+                type="submit"
+                disabled={isSubmitting}
+                // isLoading={isSubmitting}
+              />
+            </Form>
+          )}
+        </Formik>
       </Box>
     </AppContainer>
   );

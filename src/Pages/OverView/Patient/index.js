@@ -94,7 +94,7 @@ const DashboardPatient = () => {
                       Need to see a doctor?
                     </p>
                     <p className="PatientDashboard-message">
-                      Book your appointment in a few clicks.
+                      Book your appointment in a few click.
                     </p>
                   </div>
                 </div>

@@ -420,7 +420,45 @@ export const ForgotPasswordVS = (role) => {
         : yup.string().nullable(),
   });
 };
-
+export const billingForm = {
+  cardNumber: "",
+  expiryDate: "",
+  cvv: "",
+  cardHolderName: "",
+  billingAddress: "",
+  phoneNumber: "",
+  amount: "",
+  paymentMethod: "cash",
+  paypalEmail: "",
+};
+export const PaymentBillingVS = yup.object().shape({
+  cardNumber: yup
+    .string()
+    .required("Card Number is required")
+    .matches(/^[0-9]{16}$/, "Card Number must be 16 digits"),
+  expiryDate: yup
+    .string()
+    .required("Expiry Date is required")
+    .matches(/^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/, "Invalid Expiry Date"),
+  cvv: yup
+    .string()
+    .required("CVV is required")
+    .matches(/^[0-9]{3,4}$/, "CVV must be 3 or 4 digits"),
+  cardHolderName: yup.string().required("Card Holder Name is required"),
+  billingAddress: yup.string().required("Billing Address is required"),
+  phoneNumber: yup
+    .string()
+    .required("Phone Number is required")
+    .matches(/^[0-9]{11}$/, "Phone Number must be 11 digits"),
+  amount: yup.number().required("Amount is required"),
+  paypalEmail: yup
+    .string()
+    .email("Invalid email")
+    .when("paymentMethod", {
+      is: "paypal",
+      then: yup.string().required("PayPal Email is required"),
+    }),
+});
 export const ContactUsVS = yup.object().shape({
   subject: yup.string().required("Subject Required"),
   message: yup.string().required("Message Required"),

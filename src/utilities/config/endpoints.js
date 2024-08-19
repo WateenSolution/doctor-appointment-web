@@ -1,6 +1,6 @@
 export const BASE_URL = process.env.REACT_APP_BASE_URL;
 export const WEATHER_BASE_URL = process.env.REACT_APP_WEATHER_BASE_URL;
-console.log("base addrees is", BASE_URL);
+
 export const ENDPOINTS = {
   LOGIN: "/auth/login",
   LOGOUT: "/auth/logout",

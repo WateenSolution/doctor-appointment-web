@@ -10,8 +10,6 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Toolbar,
-  Typography,
   useMediaQuery,
 } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
@@ -31,6 +29,8 @@ import {
   BookAppointmentIcon,
   MyAppointmentIcon,
   LiveChatIcon,
+  TelemedicineIcon,
+  PaymentBillingIcon,
 } from "../../components";
 
 const drawerWidth = 250;
@@ -48,7 +48,7 @@ const openedMixin = (theme) => ({
   borderTopLeftRadius: "0px",
   borderBottomLeftRadius: "0px",
   boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
-  height: "100vh", // Ensure the Drawer takes full height
+  height: "100vh",
 });
 
 const closedMixin = (theme) => ({
@@ -109,6 +109,11 @@ const renderMenu = (viewOption, color) => {
       return <MyAppointmentIcon height={20} width={20} fill={color} />;
     case "liveChat":
       return <LiveChatIcon height={20} width={20} fill={color} />;
+    case "teleMedicine":
+      return <TelemedicineIcon height={20} width={20} fill={color} />;
+    case "invoice":
+      return <PaymentBillingIcon height={20} width={20} fill={color} />;
+
     default:
       return null;
   }
@@ -175,8 +180,8 @@ export default function Sidenav(props) {
           {open && (
             <img
               src={logo}
-              height={"25%"}
-              width={"25%"}
+              height={"50%"}
+              width={"50%"}
               alt="Logo"
               className="logoAnimation"
               style={{ marginLeft: "10px" }}
@@ -245,6 +250,10 @@ export default function Sidenav(props) {
               return null;
             }
           })}
+        </List>
+        <Box sx={{ flexGrow: 1 }} />{" "}
+        {/* Empty Box to push logout to the bottom */}
+        <List>
           <ListItem key="logout" disablePadding sx={{ display: "block" }}>
             <ListItemButton
               onClick={onLogout}
@@ -281,15 +290,10 @@ export default function Sidenav(props) {
               position: "absolute",
               top: theme.spacing(2),
               left: theme.spacing(1),
-              backgroundColor: "#ffffff",
-              borderRadius: "4px",
-              padding: "10px",
-              transition: "opacity 0.3s ease, transform 0.3s ease",
-              "&:hover": {
-                boxShadow: "0px 5px 14px rgba(0, 0, 0, 0.15)",
-                backgroundColor: "transparent",
-                transform: "scale(1.1)",
-              },
+              ...(open && { display: "none" }),
+              backgroundColor: "#012d75",
+              color: "#fff",
+              borderRadius: "50%",
             }}
           >
             <MenuIcon />

@@ -26,9 +26,16 @@ export const sideBarItems = [
   {
     id: 3,
     title: "Payment & Billing",
-    icon: "myAppointment",
+    icon: "invoice",
     path: "/payment-billing",
     roles: ["Patient"],
+  },
+  {
+    id: 4,
+    title: "Telemedicine",
+    icon: "teleMedicine",
+    path: "/telemedicine",
+    roles: ["Patient", "Doctor"],
   },
 ];
 
@@ -416,38 +423,6 @@ export const showTicketItems = {
   taskName: true,
 };
 
-export const inductionFormColumns = [
-  { id: "id", label: "ID", minWidth: 120 },
-  { id: "site_id", label: "Site Id", minWidth: 200 },
-  { id: "site_name", label: "Site", minWidth: 250 },
-  { id: "client_name", label: "Client Name", minWidth: 120 },
-  { id: "status", label: "Application Status", minWidth: 120 },
-  { id: "submitted_by", label: "Submitted By", minWidth: 120 },
-  { id: "created_at", label: "Created At", minWidth: 120 },
-  { id: "actions", label: "Actions", minWidth: 120 },
-];
-
-export const alarmRows = [
-  {
-    id: "01",
-    site: "TRTM FSD",
-    events: "PV abnormal alarm",
-    alarmStartDate: "2023-05-09 11:17:51",
-    alarmStatus: "Inactive",
-    elapsedTime: "1 day",
-    priority: "Critical",
-  },
-  {
-    id: "02",
-    site: "Pepsi Phoolnagar",
-    events: "PV abnormal alarm",
-    alarmStartDate: "2023-05-09 11:17:51",
-    alarmStatus: "Inactive",
-    elapsedTime: "1 day",
-    priority: "Major",
-  },
-];
-
 export const switchOptions = [
   {
     label: "Daily",
@@ -480,66 +455,6 @@ export const tabs = [
 
 export const sites = ["Pepsi Phoolnagar", "TRTM FSD", "Mughal Steel Mills"];
 
-export const actualVsExpected = [
-  { time: "00:00:00", actual: 3.79, expected: 0, curtailment: 0 },
-  { time: "00:35:00", actual: 3.85, expected: 2.57, curtailment: 0 },
-  { time: "01:10:00", actual: 4.24, expected: 3.67, curtailment: 0 },
-  { time: "01:45:00", actual: 3.79, expected: 2.45, curtailment: 0 },
-  { time: "02:20:00", actual: 3.56, expected: 5.34, curtailment: 0 },
-  { time: "02:55:00", actual: 4.5, expected: 8.93, curtailment: 0 },
-  { time: "03:30:00", actual: 4.67, expected: 8.93, curtailment: 0 },
-  { time: "04:05:00", actual: 4.65, expected: 9.34, curtailment: 0 },
-  { time: "04:40:00", actual: 4.68, expected: 9.43, curtailment: 0 },
-  { time: "05:15:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "05:50:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "06:25:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "05:15:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "07:00:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "07:35:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "08:10:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "08:45:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "09:20:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "09:55:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "10:30:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "11:05:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "11:40:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "12:15:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "12:50:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "13:25:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "14:00:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "14:35:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "15:10:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "15:45:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "16:20:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "16:55:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "17:30:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "18:05:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "18:40:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "19:15:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "19:50:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "20:25:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "21:00:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "21:35:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "22:10:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "22:45:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-  { time: "23:20:00", actual: 4.78, expected: 9.45, curtailment: 0 },
-];
-
-export const perfRatioComp = [
-  { site: "Ameen Farm House", perfRatio: 92.304, tempPerfRatio: 99.252 },
-  { site: "TRTM FSD", perfRatio: 63.098, tempPerfRatio: 67.098 },
-  { site: "Pepsi Co Greenhouse", perfRatio: 62.43, tempPerfRatio: 67.13 },
-  { site: "Syngenta Warehouse", perfRatio: 53.87, tempPerfRatio: 57.32 },
-  { site: "Ameen Farm House", perfRatio: 92.304, tempPerfRatio: 99.252 },
-  { site: "TRTM FSD", perfRatio: 63.098, tempPerfRatio: 67.098 },
-];
-
-export const regions = [
-  { name: "North", label: "North", id: 1 },
-  { name: "South", label: "South", id: 2 },
-  { name: "Central", label: "Central", id: 3 },
-];
-
 export const status = [
   { label: "Active", id: 1 },
   { label: "Inactive", id: 2 },
@@ -548,12 +463,6 @@ export const status = [
 export const time = [
   { label: "Ascending", id: 1 },
   { label: "Descending", id: 2 },
-];
-
-export const category = [
-  { label: "Platinum", id: 1 },
-  { label: "Gold", id: 2 },
-  { label: "Silver", id: 3 },
 ];
 
 export const severity = [

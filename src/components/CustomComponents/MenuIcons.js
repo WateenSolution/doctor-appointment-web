@@ -207,3 +207,115 @@ export const LiveChatIcon = ({
     </svg>
   );
 };
+
+export const TelemedicineIcon = ({
+  fill = "#4e5faf",
+  height = "24",
+  width = "24",
+}) => {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient
+          id="telemedicineGradient"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="100%"
+        >
+          <stop offset="0%" style={{ stopColor: "#4e5faf", stopOpacity: 1 }} />
+          <stop
+            offset="100%"
+            style={{ stopColor: "#1d3c6e", stopOpacity: 1 }}
+          />
+        </linearGradient>
+        <filter id="telemedicineShadow" x="0" y="0" width="150%" height="150%">
+          <feDropShadow
+            dx="2"
+            dy="2"
+            stdDeviation="3"
+            floodColor="rgba(0, 0, 0, 0.2)"
+          />
+        </filter>
+      </defs>
+      <path
+        d="M20 2H4C2.9 2 2 2.9 2 4V18C2 19.1 2.9 20 4 20H16L20 24V4C20 2.9 19.1 2 18 2H16V6H8V2H4C2.9 2 2 2.9 2 4V18C2 19.1 2.9 20 4 20H6V18H4V4H18V6H16V18H18V20H4C2.9 20 2 19.1 2 18V6H4V18H18V6H20V18H16L18 20V6C18 4.9 17.1 4 16 4H14V6H10V2H8V4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H18L22 24V4C22 2.9 21.1 2 20 2Z"
+        fill="url(#telemedicineGradient)"
+        filter="url(#telemedicineShadow)"
+      />
+      <path d="M10 13H14V15H10V13Z" fill="#ffffff" />
+      <path
+        d="M12 8C10.34 8 9 9.34 9 11C9 12.66 10.34 14 12 14C13.66 14 15 12.66 15 11C15 9.34 13.66 8 12 8ZM12 12C11.45 12 11 11.55 11 11C11 10.45 11.45 10 12 10C12.55 10 13 10.45 13 11C13 11.55 12.55 12 12 12Z"
+        fill="#ffffff"
+      />
+    </svg>
+  );
+};
+
+export const PaymentBillingIcon = ({
+  fill = "#4e5faf",
+  height = "24",
+  width = "24",
+}) => {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient
+          id="paymentGradient"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="100%"
+        >
+          <stop offset="0%" style={{ stopColor: "#4e5faf", stopOpacity: 1 }} />
+          <stop
+            offset="100%"
+            style={{ stopColor: "#1d3c6e", stopOpacity: 1 }}
+          />
+        </linearGradient>
+        <filter id="paymentShadow" x="0" y="0" width="150%" height="150%">
+          <feDropShadow
+            dx="2"
+            dy="2"
+            stdDeviation="3"
+            floodColor="rgba(0, 0, 0, 0.2)"
+          />
+        </filter>
+      </defs>
+      <rect
+        x="2"
+        y="5"
+        width="20"
+        height="14"
+        rx="2"
+        ry="2"
+        fill="url(#paymentGradient)"
+        filter="url(#paymentShadow)"
+      />
+      <path
+        d="M4 8H20V10H4V8ZM4 12H20V14H4V12ZM4 16H20V18H4V16Z"
+        fill="#ffffff"
+      />
+      <path
+        d="M6 8V10H8V8H6ZM6 12V14H8V12H6ZM10 8V10H12V8H10ZM10 12V14H12V12H10ZM14 8V10H16V8H14ZM14 12V14H16V12H14Z"
+        fill="#ffffff"
+      />
+      <path
+        d="M10 16H14V18H10V16ZM12 17V17.5H11.5V17H12ZM12 16V15.5H11.5V16H12Z"
+        fill="#ffffff"
+      />
+    </svg>
+  );
+};
