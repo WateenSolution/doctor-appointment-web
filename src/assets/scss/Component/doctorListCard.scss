@@ -1,132 +1,105 @@
 .doctorListCard {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
   background: linear-gradient(135deg, #4e5faf, #2a3b8f);
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   position: relative;
+  overflow: hidden; /* Ensure content stays within bounds */
+  width: 100%; /* Full width for responsiveness */
+  max-width: 350px; /* Maximum width for the card */
+  margin: 0 auto; /* Center the card horizontally */
 
   &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-  }
+    cursor: pointer;
+    box-shadow: 0 12px 24px rgba(235, 36, 36, 0.3);
+    background: linear-gradient(135deg, #4e5faf, #2a3b8f);
 
-  .leftSide {
-    display: flex;
-    flex-direction: column;
-    color: white;
-
-    .valueContainer {
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-      position: relative;
-    }
-
-    .ratingContainer {
+    &::before {
+      content: "";
       position: absolute;
-      top: 10px;
-      right: 10px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .description {
-      margin-top: 10px;
-      font-style: italic;
-    }
-
-    .reviewsContainer {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-
-      color: rgba(255, 255, 255, 0.7);
-    }
-  }
-
-  .rightSide {
-    display: flex;
-    align-items: center;
-
-    .iconContainer {
-      display: flex;
-      align-items: center;
-      position: relative;
-
-      img {
-        border-radius: 50%;
-        border: 3px solid white;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
-        transition: transform 0.3s ease;
-
-        &:hover {
-          transform: scale(1.05);
-        }
-      }
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 0, 0, 0.5),
+        rgba(255, 0, 0, 0.2)
+      );
+      z-index: 1;
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
     }
 
     .additionalIcons {
-      display: flex;
-      gap: 15px;
-      margin-left: 20px;
+      opacity: 1;
+      visibility: visible;
+      z-index: 2;
     }
   }
 
-  .ratingStar {
-    font-size: 16px;
+  .iconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .detailsColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 10px; /* Space below details column */
+  }
+
+  .valueColumn {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ratingContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .reviewsContainer {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  .description {
+    margin-top: 5px;
+    overflow: hidden; /* Ensure text does not overflow */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .additionalIcons {
+    display: flex;
+    gap: 15px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
   }
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 15px;
-
-    .leftSide {
-      width: 100%;
-      margin-bottom: 15px;
-    }
-
-    .rightSide {
-      width: 100%;
-      display: flex;
+    .additionalIcons {
       justify-content: center;
-
-      .iconContainer img {
-        height: 40px;
-        width: 40px;
-      }
-
-      .additionalIcons {
-        margin-left: 0;
-      }
-    }
-  }
-
-  @media (max-width: 480px) {
-    .leftSide {
-      font-size: 14px;
-
-      .valueContainer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .ratingContainer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    .rightSide {
-      .iconContainer img {
-        height: 30px;
-        width: 30px;
-      }
+      width: 100%;
+      margin-top: 15px;
+      position: relative;
+      bottom: auto;
+      left: auto;
+      transform: none;
     }
   }
 }

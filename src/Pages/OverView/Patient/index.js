@@ -94,7 +94,7 @@ const DashboardPatient = () => {
                       Need to see a doctor?
                     </p>
                     <p className="PatientDashboard-message">
-                      Book your appointment in a few click.
+                      Book your appointment in a few clicks.
                     </p>
                   </div>
                 </div>
@@ -109,21 +109,18 @@ const DashboardPatient = () => {
                 </Fade>
               </Col>
             </Row>
-
             <Row>
               <OverviewCommonCard bgColor="#F0F0F0">
                 <Col span={24}>
                   <Select
                     placeholder="Filter by Specialization"
                     onChange={handleFilterChange}
-                    style={{ width: "100%", marginBottom: "10px" }}
+                    style={{ width: "100%" }}
                   >
                     <Option value="Cardiology">Cardiology</Option>
                     <Option value="Dermatology">Dermatology</Option>
-                    <Option value="Neurology">Orthopedics</Option>
+                    <Option value="Orthopedics">Orthopedics</Option>
                     <Option value="Pediatrics">Pediatrics</Option>
-
-                    {/* Add more options as needed */}
                   </Select>
                 </Col>
                 <div className="doctor-list-container">

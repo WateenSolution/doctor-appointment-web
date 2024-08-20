@@ -2,27 +2,23 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CustomTextBox } from "../CustomComponents/CustomTextBox";
 import { profile } from "../../utilities";
+import { Row, Col, Tooltip } from "antd";
 import {
   StarFilled,
   UserOutlined,
   CalendarOutlined,
   MessageOutlined,
 } from "@ant-design/icons";
-import { Tooltip } from "antd";
-import { motion } from "framer-motion";
 
 export const DoctorListCard = ({
-  id, // Add the doctor's ID as a prop
+  id,
   title,
   iconSrc,
   value,
   valUnit,
-  icoHeight,
-  icoWidth,
   unitLeft,
   mT,
   mL,
-  con_mT,
   rating,
   description,
   totalReviews,
@@ -30,7 +26,6 @@ export const DoctorListCard = ({
 }) => {
   const navigate = useNavigate();
 
-  // Helper function to render rating stars
   const renderRatingStars = () => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -48,150 +43,130 @@ export const DoctorListCard = ({
     return stars;
   };
 
-  // Click handler for the calendar icon
   const handleCalendarClick = () => {
     navigate(`/appointment-form/${id}`, {
-      state: {
-        data: { id },
-      },
+      state: { data: { id } },
     });
   };
+
   const handleChatClick = () => {
     navigate("/live-chat", {
       state: {
         user_id: id,
         username: title,
-        doctor_name: perUsername, // Assuming doctor object has name
-        doctor_image: iconSrc, // Assuming doctor object has image URL
+        doctor_name: perUsername,
+        doctor_image: iconSrc,
       },
     });
   };
-  return (
-    <div
-      className="doctorListCard"
-      style={{
-        marginTop: mT,
-        marginLeft: mL,
-      }}
-      whileHover={{ scale: 1.03 }}
-    >
-      <div className="leftSide">
-        <CustomTextBox
-          text={title}
-          textFontColor="white"
-          textFontSize={18}
-          textFontWeight={600}
-          textFontFamily="Lato"
-          textLineHeight="22px"
-          textLetterSpacing={0.2}
-        />
-        <div
-          className="valueContainer"
-          style={{
-            marginTop: con_mT,
-          }}
-        >
-          {unitLeft && value !== null && value !== undefined && (
-            <CustomTextBox
-              text={unitLeft}
-              textFontColor="white"
-              textFontSize={14}
-              textFontWeight={400}
-              textFontFamily="Lato"
-              textLineHeight="16.8px"
-              textLetterSpacing={0.15}
-            />
-          )}
 
-          <CustomTextBox
-            text={value ?? "--"}
-            textFontColor="white"
-            textFontSize={32}
-            textFontWeight={700}
-            textFontFamily="Lato"
-            textLineHeight="40px"
-            textLetterSpacing={0.25}
-          />
-          {valUnit && value !== null && value !== undefined && (
-            <CustomTextBox
-              text={valUnit}
-              textFontColor="white"
-              textFontSize={14}
-              textFontWeight={400}
-              textFontFamily="Lato"
-              textLineHeight="16.8px"
-              textLetterSpacing={0.15}
-              style={{ marginLeft: 6 }}
-            />
-          )}
-        </div>
-        {description && (
-          <div className="description">
-            <CustomTextBox
-              text={description}
-              textFontColor="white"
-              textFontSize={14}
-              textFontWeight={400}
-              textFontFamily="Lato"
-              textLineHeight="16.8px"
-              textLetterSpacing={0.15}
-            />
+  const truncateDescription = (desc) => {
+    if (desc.length > 15) {
+      return desc.slice(0, 15) + "...";
+    }
+    return desc;
+  };
+
+  return (
+    <div className="doctorListCard" style={{ marginTop: mT, marginLeft: mL }}>
+      <Row>
+        <Col span={4}>
+          <div className="iconContainer">
+            <img height={50} width={50} src={iconSrc || profile} alt={title} />
           </div>
-        )}
-        {rating !== undefined && (
-          <div className="ratingContainer">
-            {renderRatingStars()}
+        </Col>
+        <Col span={20}>
+          <div className="detailsColumn">
             <CustomTextBox
-              text={rating ?? "0"}
+              text={title}
               textFontColor="white"
-              textFontSize={14}
-              textFontWeight={400}
+              textFontSize={18}
+              textFontWeight={600}
               textFontFamily="Lato"
-              textLineHeight="16.8px"
-              textLetterSpacing={0.15}
+              textLineHeight="22px"
+              textLetterSpacing={0.2}
             />
-            {totalReviews !== undefined && (
-              <div className="reviewsContainer">
-                <UserOutlined style={{ fontSize: "14px", color: "#fff" }} />
+            {description && (
+              <div className="description">
                 <CustomTextBox
-                  text={totalReviews || "0"}
+                  text={truncateDescription(description)}
                   textFontColor="white"
-                  textFontSize={12}
+                  textFontSize={14}
                   textFontWeight={400}
                   textFontFamily="Lato"
                   textLineHeight="16.8px"
                   textLetterSpacing={0.15}
-                  style={{ marginLeft: 4 }}
                 />
               </div>
             )}
+            <div className="valueColumn">
+              <CustomTextBox
+                text={value ?? "--"}
+                textFontColor="white"
+                textFontSize={28}
+                textFontWeight={700}
+                textFontFamily="Lato"
+                textLineHeight="40px"
+                textLetterSpacing={0.25}
+              />
+            </div>
           </div>
-        )}
-      </div>
-      <div className="rightSide">
-        <div className="iconContainer">
-          <img
-            height={icoHeight || 50}
-            width={icoWidth || 50}
-            src={iconSrc || profile}
-            alt={title}
-          />
-        </div>
-        <div className="additionalIcons">
-          <Tooltip title="Appointment">
-            <CalendarOutlined
-              style={{ fontSize: "20px", color: "#fff", cursor: "pointer" }}
-              onClick={handleCalendarClick} // Add click handler for calendar icon
-            />
-          </Tooltip>
-          <Tooltip title="Chat">
-            <MessageOutlined
-              style={{ fontSize: "20px", color: "#fff" }}
-              onClick={handleChatClick}
-            />
-          </Tooltip>
-        </div>
-      </div>
+        </Col>
+
+        <Row>
+          <Col span={24}>
+            <div>
+              {rating !== undefined && (
+                <div className="ratingContainer">
+                  {renderRatingStars()}
+                  <CustomTextBox
+                    text={rating ?? "0"}
+                    textFontColor="white"
+                    textFontSize={14}
+                    textFontWeight={400}
+                    textFontFamily="Lato"
+                    textLineHeight="16.8px"
+                    textLetterSpacing={0.15}
+                  />
+                  {totalReviews !== undefined && (
+                    <div className="reviewsContainer">
+                      <UserOutlined
+                        style={{ fontSize: "14px", color: "#fff" }}
+                      />
+                      <CustomTextBox
+                        text={totalReviews || "0"}
+                        textFontColor="white"
+                        textFontSize={12}
+                        textFontWeight={400}
+                        textFontFamily="Lato"
+                        textLineHeight="16.8px"
+                        textLetterSpacing={0.15}
+                        style={{ marginLeft: 4 }}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </Col>
+        </Row>
+        <Col span={24}>
+          <div className="additionalIcons">
+            <Tooltip title="Appointment">
+              <CalendarOutlined
+                style={{ fontSize: "20px", color: "#fff", cursor: "pointer" }}
+                onClick={handleCalendarClick}
+              />
+            </Tooltip>
+            <Tooltip title="Chat">
+              <MessageOutlined
+                style={{ fontSize: "20px", color: "#fff", cursor: "pointer" }}
+                onClick={handleChatClick}
+              />
+            </Tooltip>
+          </div>
+        </Col>
+      </Row>
     </div>
   );
 };
